@@ -30,7 +30,7 @@ This Sedna update release includes:
 
 *  UpsizingWizard.APP can be started with default settings (via params) for source name and path, target db, and a Boolean indicating if the target database is to be created.
 
-The Upsizing Wizard is part of Sedna, a collection of libraries, samples and add-ons to Visual FoxPro 9.0 SP2.
+The Upsizing Wizard is part of [Sedna](https://github.com/VFPX/Sedna), a collection of libraries, samples and add-ons to Visual FoxPro 9.0 SP2.
 
 **2017.02.22 Release**  
 This update implements better support for BulkXMLLoad by Mike Potjer.
