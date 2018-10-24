@@ -2491,18 +2491,22 @@ DEFINE CLASS choosetargetdb AS basewizardcontainer OF "basewizard.vcx" 		&& Comb
 		
 			*Make sure name isn't already taken
 			otherwise
-				lcExact = set('EXACT')
-				set exact on
-				for i = 1 to alen(This.aServerDatabases, 1)
-					if lower(This.aServerDatabases[i, 1]) = lower(lcDBName)
-						This.lblDBExists.Caption = strtran(DUPLICATE_DBNAME_LOC, '|1', ;
-							alltrim(This.txtNewDatabaseName.Value))
-						This.lblDBExists.Visible = .T.
-						llReturn = .F.
-						exit
-					endif lower(This.aServerDatabases[i, 1]) = lower(lcDBName)
-				next i
-				set exact &lcExact
+		*-- 2018-10-20 - JRL: added IF and ENDIF: if there are no database on the server, don't look for a duplicate
+				if not empty(This.aServerDatabases)
+					lcExact = set('EXACT')
+					set exact on
+					for i = 1 to alen(This.aServerDatabases, 1)
+						if lower(This.aServerDatabases[i, 1]) = lower(lcDBName)
+							This.lblDBExists.Caption = strtran(DUPLICATE_DBNAME_LOC, '|1', ;
+								alltrim(This.txtNewDatabaseName.Value))
+							This.lblDBExists.Visible = .T.
+							llReturn = .F.
+							exit
+						endif lower(This.aServerDatabases[i, 1]) = lower(lcDBName)
+					next i
+					set exact &lcExact
+		*-- 2018-10-20 - JRL
+			    endif
 		
 			*see if entered name is acceptable to server
 				if not Thisform.oEngine.ValidName(@lcDBName)
