@@ -50,7 +50,7 @@ MODIFY PROJECT 'project1.pjx' NOWAIT NOSHOW NOPROJECTHOOK
 loProject = _VFP.Projects('project1.pjx')
 
 WITH loProject.FILES
-	.ADD('upsize1.dbc')		&& *< FileMetadata: Type="d" Cpid="0" Timestamp="0" ID="0" ObjRev="0" />
+	.ADD('upsize1.dbc')		&& *< FileMetadata: Type="d" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
 	*</BuildProj>
 
 	.ITEM('__newproject.f2b').Remove()
@@ -73,6 +73,7 @@ WITH loProject
 	*<.CmntStyle = 1 />
 	*<.NoLogo = .F. />
 	*<.SaveCode = .T. />
+	*<.User = '' />
 	.ProjectHookLibrary = ''
 	.ProjectHookClass = ''
 	*</ProjectProperties>

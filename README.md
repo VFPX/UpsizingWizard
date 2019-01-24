@@ -10,7 +10,7 @@ This Sedna update release includes:
 
 *  Streamlined, simpler steps
 
-*  Support for bulk insert to improve performance.
+*  Support for bulk XML load to improve performance. Note: since SQL Server 2008, the SQLXML module that supports bulk XML load is no longer automatically installed, so download it from [https://docs.microsoft.com/en-us/sql/relational-databases/sqlxml/what-s-new-in-sqlxml-4-0-sp1?view=sql-server-2017](https://docs.microsoft.com/en-us/sql/relational-databases/sqlxml/what-s-new-in-sqlxml-4-0-sp1?view=sql-server-2017).
 
 *  Allows you to specify the connection as a DBC, a DSN, one of the existing connections or a new connection string.
 
@@ -31,6 +31,9 @@ This Sedna update release includes:
 *  UpsizingWizard.APP can be started with default settings (via params) for source name and path, target db, and a Boolean indicating if the target database is to be created.
 
 The Upsizing Wizard is part of [Sedna](https://github.com/VFPX/Sedna), a collection of libraries, samples and add-ons to Visual FoxPro 9.0 SP2.
+
+**2019.01.24 Release**  
+This update handles large tables in BulkXMLLoad better by processing records in batches. It also renames the built-in tables Keywords.dbf, ExprMap.dbf, and TypeMap.dbf to have an underscore prefix to avoid conflict with tables using those names in the database to be upsized.
 
 **2017.02.22 Release**  
 This update implements better support for BulkXMLLoad by Mike Potjer.

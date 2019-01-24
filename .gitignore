@@ -1,4 +1,12 @@
 *.FXP
 *.ERR
 *.BAK
+*.log
 *.zip
+Upsize/*
+Solution.xml
+UPSIZINGWIZARD_MetaData.*
+matt_upsize_engine.*
+ThorUpdater/*.ps1
+ThorUpdater/Project.txt
+ThorUpdater/Version.txt

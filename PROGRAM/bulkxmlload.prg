@@ -2,7 +2,7 @@
 * Function:			BulkXMLLoad
 * Purpose:			Performs a SQL Server bulk XML load
 * Author:			Doug Hennig
-* Last revision:	02/22/2017
+* Last revision:	01/24/2019
 * Parameters:		tcAlias      - the alias of the cursor to export
 *					tcTable      - the name of the table to import into
 *					ttBlank      - the value to use for blank DateTime values
@@ -22,7 +22,7 @@
 *						loading on a local server, the temporary file path must
 *						be a UNC path (such as \\servername\sharename). If
 *						specified, transactional processing will be enabled for
-*						the XML bulk load.
+*						the XML bulk load
 * Returns:			an empty string if the bulk load succeeded or the text of
 *						an error message if it failed
 * Environment in:	the alias specified in tcAlias must be open
@@ -53,6 +53,10 @@
 *					The reason I added that is because when I was testing, the
 *					XML bulk load choked on a table where a CHR(2) had somehow
 *					gotten into a field of user-entered data.
+*
+*					Change made 2019-01-24: to handle large tables, XML output
+*					is now done in batches of up to 500 MB of records at a
+*					time.
 *==============================================================================
 
 lparameters tcAlias, ;
@@ -76,11 +80,13 @@ local lnSelect, ;
 	lcReplaceCommand, ;
 	lcSchema, ;
 	lcData, ;
+	lnRecords, ;
+	lnRecsProcessed, ;
 	lcReturn, ;
 	loException as Exception, ;
 	lcXSD, ;
 	loBulkLoad
-#include Include\AllDefs.H
+#include ..\Include\AllDefs.H
 
 * These characters are illegal according to the XML 1.0 specification. CHR(0)
 * is also illegal, but we're leaving that alone because they may be situations
@@ -151,84 +157,101 @@ if ascan(laFields, 'C', -1, -1, 2, 7) > 0 or ;
 	next lnI
 endif ascan(laFields ...
 
+* We don't want the XML files to exceed 500 MB (the files can be up to 2 GB but
+* XML is verbose so we have to account for that) so we may have to process the
+* table in batches.
+
+lnRecords       = ceiling(500000000/recsize())
+lnRecsProcessed = 0
+
 * Create the XML data and schema files.
 
 lcSchema = forceext(tcTable, 'xsd')
 lcData   = forceext(tcTable, 'xml')
-try
-	cursortoxml(alias(), lcData, 1, 512 + 8, 0, lcSchema)
-	lcReturn = ''
-catch to loException
-	lcReturn = loException.Message
-endtry
-
-* If we created a cursor, close it.
-
-if llClose
-	use
-endif llClose
+lcReturn = ''
+go top
+do while lnRecsProcessed < reccount()
+	try
+		cursortoxml(alias(), lcData, 1, 512 + 8, lnRecords, lcSchema)
+	catch to loException
+		lcReturn = loException.Message
+	endtry
 
 * Convert the XSD into a format acceptable by SQL Server. Add the SQL
 * namespace, convert the <xsd:choice> start and end tags to <xsd:sequence>,
 * use the sql:datatype attribute for DateTime fields, and specify the table
-* imported into with the sql:relation attribute.
+* imported into with the sql:relation attribute. Note: although the XSD content
+* doesn't change, the file has to be recreated on each pass or the bulk XML
+* load won't import any records on the second and subsequent passes.
 
-if empty(lcReturn)
-	lcXSD = filetostr(lcSchema)
-	lcXSD = strtran(lcXSD, ':xml-msdata">', ;
-		':xml-msdata" xmlns:sql="urn:schemas-microsoft-com:mapping-schema">')
-	lcXSD = strtran(lcXSD, 'IsDataSet="true">', ;
-		'IsDataSet="true" sql:is-constant="1">')
-	lcXSD = strtran(lcXSD, '<xsd:choice maxOccurs="unbounded">', ;
-		'<xsd:sequence>')
-	lcXSD = strtran(lcXSD, '</xsd:choice>', ;
-		'</xsd:sequence>')
-	lcXSD = strtran(lcXSD, 'type="xsd:dateTime"', ;
-		'type="xsd:dateTime" sql:datatype="dateTime"')
-	lcXSD = strtran(lcXSD, 'minOccurs="0"', ;
-		'sql:relation="' + lower(tcTable) + '" minOccurs="0"')
-	strtofile(lcXSD, lcSchema)
+	if empty(lcReturn)
+		lcXSD = filetostr(lcSchema)
+		lcXSD = strtran(lcXSD, ':xml-msdata">', ;
+			':xml-msdata" xmlns:sql="urn:schemas-microsoft-com:mapping-schema">')
+		lcXSD = strtran(lcXSD, 'IsDataSet="true">', ;
+			'IsDataSet="true" sql:is-constant="1">')
+		lcXSD = strtran(lcXSD, '<xsd:choice maxOccurs="unbounded">', ;
+			'<xsd:sequence>')
+		lcXSD = strtran(lcXSD, '</xsd:choice>', ;
+			'</xsd:sequence>')
+		lcXSD = strtran(lcXSD, 'type="xsd:dateTime"', ;
+			'type="xsd:dateTime" sql:datatype="dateTime"')
+		lcXSD = strtran(lcXSD, 'minOccurs="0"', ;
+			'sql:relation="' + lower(tcTable) + '" minOccurs="0"')
+		strtofile(lcXSD, lcSchema)
 
 * Instantiate the SQLXMLBulkLoad object and set its ConnectionString and other
 * properties. Note: we can set the ErrorLogFile property to the name of a file
 * to write import errors to; that isn't done here.
 
-	try
-		loBulkLoad   = createobject('SQLXMLBulkLoad.SQLXMLBulkload.4.0')
-		lcConnString = 'Provider=SQLOLEDB.1;Initial Catalog=' + tcDatabase + ;
-			';Data Source=' + tcServer + ';Persist Security Info=False;'
-		if empty(tcUserName)
-			lcConnString = lcConnString + 'Integrated Security=SSPI'
-		else
-			lcConnString = lcConnString + 'User ID=' + tcUserName + ;
-				';Password=' + tcPassword
-		endif empty(tcUserName)
-		loBulkLoad.ConnectionString = lcConnString
-		loBulkLoad.KeepNulls        = .T.
+		try
+			loBulkLoad   = createobject('SQLXMLBulkLoad.SQLXMLBulkload.4.0')
+			lcConnString = 'Provider=SQLOLEDB.1;Initial Catalog=' + tcDatabase + ;
+				';Data Source=' + tcServer + ';Persist Security Info=False;'
+			if empty(tcUserName)
+				lcConnString = lcConnString + 'Integrated Security=SSPI'
+			else
+				lcConnString = lcConnString + 'User ID=' + tcUserName + ;
+					';Password=' + tcPassword
+			endif empty(tcUserName)
+			loBulkLoad.ConnectionString = lcConnString
+			loBulkLoad.KeepNulls        = .T.
+			loBulkLoad.ForceTableLock   = .T.
 
-* If a temp folder was specified, turn on transaction processing for the bulk
-* load. This allows the XML bulk load to succeed when you have blank string
-* fields and do not allow NULL values. I have not been able to find any
-* explanation WHY transaction processing allows blank strings when
-* non-transaction processing forces NULL values to be saved.
+* Turn on transaction processing for the bulk load. This allows the XML bulk
+* load to succeed when you have blank string fields and do not allow NULL
+* values. I have not been able to find any explanation WHY transaction
+* processing allows blank strings when non-transaction processing forces NULL
+* values to be saved. If a temporary folder was specified, use it; otherwise
+* the location specified in the TEMP environment variable is used.
 
-		if not empty(tcTempFolder)
-			loBulkLoad.Transaction	= .T.
-			loBulkLoad.TempFilePath = tcTempFolder
-		endif not empty(tcTempFolder)
+			loBulkLoad.Transaction = .T.
+			if not empty(tcTempFolder)
+				loBulkLoad.TempFilePath = tcTempFolder
+			endif not empty(tcTempFolder)
 
 * Call Execute to perform the bulk import.
 
-		loBulkLoad.Execute(lcSchema, lcData)
-		lcReturn = ''
-	catch to loException
-		lcReturn = loException.Message
-	endtry
+			loBulkLoad.Execute(lcSchema, lcData)
+		catch to loException
+			lcReturn = loException.Message
+		endtry
+	endif empty(lcReturn)
+	lnRecsProcessed = lnRecsProcessed + lnRecords
+	if not eof()
+		skip
+	endif not eof()
+	if not empty(lcReturn)
+		exit
+	endif not empty(lcReturn)
+enddo while lnRecsProcessed < reccount()
 
-* Clean up.
+* Clean up. If we created a cursor, close it.
 
-	erase (lcSchema)
-	erase (lcData)
-endif empty(lcReturn)
+if llClose
+	use
+endif llClose
+erase (lcSchema)
+erase (lcData)
 select (lnSelect)
 return lcReturn

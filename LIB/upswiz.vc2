@@ -1713,15 +1713,15 @@ DEFINE CLASS cfieldtypemap AS basecontainer OF "basecontrols.vcx"
 			lcRmtType=RTRIM(&lcMappingTable..RmtType)
 			lcLocalType=RTRIM(&lcMappingTable..DataType)
 			lnOldArea=SELECT()
-			SELECT TypeMap	
+			SELECT _TypeMap	
 			LOCATE FOR RTRIM(RemoteType)==lcRmtType ;
 				AND RTRIM(LocalType)==lcLocalType ;
 				AND Server=RTRIM(Thisform.oEngine.ServerType)
-			this.grcRmtLength.Enabled=TypeMap.VarLength
-			this.grcRmtPrec.Enabled=TypeMap.HasPrec
+			this.grcRmtLength.Enabled=_TypeMap.VarLength
+			this.grcRmtPrec.Enabled=_TypeMap.HasPrec
 		
-			this.grcRmtLength.Readonly=!TypeMap.VarLength
-			this.grcRmtPrec.Readonly=!TypeMap.HasPrec
+			this.grcRmtLength.Readonly=!_TypeMap.VarLength
+			this.grcRmtPrec.Readonly=!_TypeMap.HasPrec
 			SELECT(lnOldArea)
 		ENDIF
 		

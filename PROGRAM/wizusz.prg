@@ -502,9 +502,10 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
         lcAction=IIF(THIS.DoReport AND THIS.ProcessingOutput,"Close","Delete")
 
         *Deal with tables that are part of the upsizing wizard project (that don't need to be deleted)
-        THIS.DisposeTable("Keywords","Close")
-        THIS.DisposeTable("ExprMap","Close")
-        THIS.DisposeTable("TypeMap","Close")
+*** 2019-01-24: prefix built-in tables with "_" to avoid conflict with tables with same names in DBC to be upsized
+        THIS.DisposeTable("_Keywords","Close")
+        THIS.DisposeTable("_ExprMap","Close")
+        THIS.DisposeTable("_TypeMap","Close")
 
         *Close this cursor (created in SQL 95 case)
         THIS.DisposeTable(THIS.OraNames,"Close")
@@ -4502,25 +4503,26 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
     ENDPROC
 
 
+*** 2019-01-24: prefix built-in tables with "_" to avoid conflict with tables with same names in DBC to be upsized
     PROCEDURE GetDefaultMapping
         PARAMETERS aPassedArray
         LOCAL lnOldArea, lcServerConstraint
 
 *** DH 2015-09-14: handle TypeMap not existing
-		if not file('TypeMap.dbf')
+		if not file('_TypeMap.dbf')
 			This.HadError = .T.
-			This.ErrorMessage = 'TypeMap.dbf cannot be found'
+			This.ErrorMessage = '_TypeMap.dbf cannot be found'
 			This.Die()
-		endif not file('TypeMap.dbf')
+		endif not file('_TypeMap.dbf')
 *** DH 2015-09-14: end of new code
         lnOldArea=SELECT()
-        IF NOT USED("TypeMap")
+        IF NOT USED("_TypeMap")
             SELECT 0
 *** DH 09/05/2013: don't open exclusively
-***            USE TypeMap EXCLUSIVE
-            USE TypeMap
+***            USE _TypeMap EXCLUSIVE
+            USE _TypeMap
         ELSE
-            SELECT TypeMap
+            SELECT _TypeMap
         ENDIF
 
         *Didn't foresee a problem, thus this cheezy snippet
@@ -4536,8 +4538,8 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
 ***            ENDIF
         ENDIF
 
-        SELECT LocalType, RemoteType, VarLength, FullLocal FROM TypeMap ;
-            WHERE  TypeMap.DEFAULT=.T. AND TypeMap.SERVER=lcServerConstraint ;
+        SELECT LocalType, RemoteType, VarLength, FullLocal FROM _TypeMap ;
+            WHERE _TypeMap.DEFAULT=.T. AND _TypeMap.SERVER=lcServerConstraint ;
             INTO ARRAY aPassedArray
 
         SELECT(lnOldArea)
@@ -5283,16 +5285,17 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
         lcSetTalk = SET('TALK')
         SET TALK OFF
 
-        IF !USED("ExprMap") THEN
+*** 2019-01-24: prefix built-in tables with "_" to avoid conflict with tables with same names in DBC to be upsized
+        IF !USED("_ExprMap") THEN
             SELECT 0
-            USE ExprMap EXCLUSIVE
+            USE _ExprMap EXCLUSIVE
             IF THIS.ServerType = "Oracle" THEN
-                SET FILTER TO !EMPTY(ExprMap.ORACLE)
+                SET FILTER TO !EMPTY(_ExprMap.ORACLE)
             ELSE
-                SET FILTER TO !EMPTY(ExprMap.SQLServer)
+                SET FILTER TO !EMPTY(_ExprMap.SQLServer)
             ENDIF
         ELSE
-            SELECT ExprMap
+            SELECT _ExprMap
         ENDIF
 
         lcRemoteExpression = ''
@@ -5365,12 +5368,13 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
 
         lcExpression = CHR(1)+lcLocalExpression
         SCAN
-            IF !ExprMap.PAD
-                lcServerSQL = RTRIM(ExprMap.&lcMapField.)
+*** 2019-01-24: prefix built-in tables with "_" to avoid conflict with tables with same names in DBC to be upsized
+            IF !_ExprMap.PAD
+                lcServerSQL = RTRIM(_ExprMap.&lcMapField.)
             ELSE
-                lcServerSQL = " "+ RTRIM(ExprMap.&lcMapField.) + " "
+                lcServerSQL = " "+ RTRIM(_ExprMap.&lcMapField.) + " "
             ENDIF
-            lcXbase = LOWER(RTRIM(ExprMap.FoxExpr))
+            lcXbase = LOWER(RTRIM(_ExprMap.FoxExpr))
             lcExpression = STRTRAN(lcExpression, lcXbase, LOWER(lcServerSQL))
         ENDSCAN
         lcExpression = SUBSTR(lcExpression,2)
@@ -8448,12 +8452,13 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
         lnOldArea=SELECT()
 
         * Check keyword table
-        IF !USED("Keywords")
+*** 2019-01-24: prefix built-in tables with "_" to avoid conflict with tables with same names in DBC to be upsized
+        IF !USED("_Keywords")
             SELECT 0
-            USE Keywords
+            USE _Keywords
             SET ORDER TO Keyword
         ELSE
-            SELECT Keywords
+            SELECT _Keywords
         ENDIF
 *** DH 12/15/2014: use only SQL Server rather than variants of it
 ***        IF RTRIM(THIS.ServerType)=="SQL Server95" THEN
@@ -8577,6 +8582,7 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
     ENDFUNC
 
 
+*** 2019-01-24: prefix built-in tables with "_" to avoid conflict with tables with same names in DBC to be upsized
     PROCEDURE CreateTypeArrays
         *Creates an array for each FoxPro datatype; each array of possible remote datatypes
         *has the same name as the local FoxPro datatype
@@ -8596,12 +8602,12 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
         ENDIF
 
         *Find all the local types
-        SELECT LocalType,"this." + LocalType FROM TypeMap ;
+        SELECT LocalType,"this." + LocalType FROM _TypeMap ;
             WHERE DEFAULT=.T. AND SERVER=lcServerConstraint ;
             INTO ARRAY aArrays
 
         FOR I=1 TO ALEN(aArrays,1)
-            SELECT RemoteType FROM TypeMap WHERE LocalType=aArrays[i,1] AND SERVER=lcServerConstraint ;
+            SELECT RemoteType FROM _TypeMap WHERE LocalType=aArrays[i,1] AND SERVER=lcServerConstraint ;
                 INTO ARRAY &aArrays[i,2]
         NEXT
 

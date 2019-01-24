@@ -33,7 +33,7 @@ _AutoIncrement = "0"
 
 
 *<BuildProj>
-*<.HomeDir = 'd:\development\ms\upsizer\upsizingwizard' />
+*<.HomeDir = 'd:\development\vfpx\upsizingwizard' />
 
 FOR EACH loProject IN _VFP.Projects FOXOBJECT
 	loProject.Close()
@@ -50,50 +50,50 @@ MODIFY PROJECT 'upsizingwizard.pjx' NOWAIT NOSHOW NOPROJECTHOOK
 loProject = _VFP.Projects('upsizingwizard.pjx')
 
 WITH loProject.FILES
-	.ADD('bitmap\exclamation.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
-	.ADD('bitmap\flag.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
-	.ADD('bitmap\flag.msk')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
-	.ADD('bitmap\upsize1.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
-	.ADD('bitmap\upsize23.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
-	.ADD('bitmap\upsize23.msk')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
-	.ADD('bitmap\upsize45.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
-	.ADD('bitmap\upsize9.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
-	.ADD('data\exprmap.dbf')		&& *< FileMetadata: Type="D" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
-	.ADD('data\keywords.dbf')		&& *< FileMetadata: Type="D" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
-	.ADD('data\project1.pjt')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
-	.ADD('data\project1.pjx')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
-	.ADD('data\rpterrs.frt')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
-	.ADD('data\rpterrs.frx')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
-	.ADD('data\rptfield.frt')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
-	.ADD('data\rptfield.frx')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
-	.ADD('data\rptindex.frt')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
-	.ADD('data\rptindex.frx')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
-	.ADD('data\rptrels.frt')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
-	.ADD('data\rptrels.frx')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
-	.ADD('data\rpttable.frt')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
-	.ADD('data\rpttable.frx')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
-	.ADD('data\rptviews.frt')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
-	.ADD('data\rptviews.frx')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
-	.ADD('data\typemap.dbf')		&& *< FileMetadata: Type="D" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
-	.ADD('include\alldefs.h')		&& *< FileMetadata: Type="T" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
-	.ADD('include\registry.h')		&& *< FileMetadata: Type="T" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
-	.ADD('include\upsizing.h')		&& *< FileMetadata: Type="T" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
-	.ADD('include\wizard.h')		&& *< FileMetadata: Type="T" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
-	.ADD('lib\basecontrols.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" />
-	.ADD('lib\basewizard.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" />
-	.ADD('lib\progressbarex.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" />
-	.ADD('lib\registry.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" />
-	.ADD('lib\sfprogressbar.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" />
-	.ADD('lib\upswiz.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" />
-	.ADD('lib\vfpctrls.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" />
-	.ADD('program\bulkxmlload.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" />
-	.ADD('program\foxresource.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" />
-	.ADD('program\main.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" />
-	.ADD('program\upswzfunc.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" />
-	.ADD('program\wizjoin.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" />
-	.ADD('program\wizusz.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" />
-	.ADD('program\wzengine.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" />
-	.ADD('upswiz.fll')		&& *< FileMetadata: Type="L" Cpid="0" Timestamp="0" ID="0" ObjRev="0" />
+	.ADD('bitmap\exclamation.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzU5MDBPNVo3MA==" />
+	.ADD('bitmap\flag.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzU5MDBPNVo2Vw==" />
+	.ADD('bitmap\flag.msk')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzU5MDBPNVo2WQ==" />
+	.ADD('bitmap\upsize1.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzU5MDBPNVoxVQ==" />
+	.ADD('bitmap\upsize23.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzU5MDBPNVo2Ug==" />
+	.ADD('bitmap\upsize23.msk')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzU5MDBPNVo2VA==" />
+	.ADD('bitmap\upsize45.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzU5MDBPNVoxVw==" />
+	.ADD('bitmap\upsize9.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzU5MDBPNVoxWA==" />
+	.ADD('data\_exprmap.dbf')		&& *< FileMetadata: Type="D" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzU5MDBPNVo0Sw==" />
+	.ADD('data\_keywords.dbf')		&& *< FileMetadata: Type="D" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzU5MDBPNVo0UQ==" />
+	.ADD('data\_typemap.dbf')		&& *< FileMetadata: Type="D" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzU5MDBPNVo0VQ==" />
+	.ADD('data\project1.pjt')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzU5MDBPNVo0WQ==" />
+	.ADD('data\project1.pjx')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzU5MDBPNVo1Mw==" />
+	.ADD('data\rpterrs.frt')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzU5MDBPNVo1Nw==" />
+	.ADD('data\rpterrs.frx')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzU5MDBPNVo1Qw==" />
+	.ADD('data\rptfield.frt')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzU5MDBPNVo1Rw==" />
+	.ADD('data\rptfield.frx')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzU5MDBPNVo1TA==" />
+	.ADD('data\rptindex.frt')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzU5MDBPNVo1Tw==" />
+	.ADD('data\rptindex.frx')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzU5MDBPNVo1Ug==" />
+	.ADD('data\rptrels.frt')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzU5MDBPNVo1VA==" />
+	.ADD('data\rptrels.frx')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzU5MDBPNVo1Vw==" />
+	.ADD('data\rpttable.frt')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzU5MDBPNVo1WQ==" />
+	.ADD('data\rpttable.frx')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzU5MDBPNVo2MQ==" />
+	.ADD('data\rptviews.frt')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzU5MDBPNVo2Mw==" />
+	.ADD('data\rptviews.frx')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzU5MDBPNVo2Ng==" />
+	.ADD('include\alldefs.h')		&& *< FileMetadata: Type="T" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzU5MDBPNVoxMw==" />
+	.ADD('include\registry.h')		&& *< FileMetadata: Type="T" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzU5MDBPNVoxNA==" />
+	.ADD('include\upsizing.h')		&& *< FileMetadata: Type="T" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzU5MDBPNVoxTw==" />
+	.ADD('include\wizard.h')		&& *< FileMetadata: Type="T" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzU5MDBPNVoxUQ==" />
+	.ADD('lib\basecontrols.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzU5MDBPNVo2OA==" />
+	.ADD('lib\basewizard.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzU5MDBPNVo2Rg==" />
+	.ADD('lib\progressbarex.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzU5MDBPNVo2UA==" />
+	.ADD('lib\registry.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzU5MDBPNVo0QQ==" />
+	.ADD('lib\sfprogressbar.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzU5MDBPNVo2TQ==" />
+	.ADD('lib\upswiz.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzU5MDBPNVo0Rw==" />
+	.ADD('lib\vfpctrls.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzU5MDBPNVo2Sw==" />
+	.ADD('program\bulkxmlload.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQARAGluY2x1ZGVcYWxsZGVmcy5orqTzZvhC" />
+	.ADD('program\foxresource.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
+	.ADD('program\main.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
+	.ADD('program\upswzfunc.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
+	.ADD('program\wizjoin.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
+	.ADD('program\wizusz.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQARAGluY2x1ZGVcYWxsZGVmcy5olvXzZvhC" />
+	.ADD('program\wzengine.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQAQAGluY2x1ZGVcd2l6YXJkLmiupGdn5DQ=" />
+	.ADD('upswiz.fll')		&& *< FileMetadata: Type="L" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzU5MDBPNVoxWg==" />
 	*</BuildProj>
 
 	.ITEM('__newproject.f2b').Remove()
@@ -121,6 +121,7 @@ WITH loProject
 	*<.CmntStyle = 1 />
 	*<.NoLogo = .F. />
 	*<.SaveCode = .T. />
+	*<.User = '' />
 	.ProjectHookLibrary = ''
 	.ProjectHookClass = ''
 	*</ProjectProperties>
