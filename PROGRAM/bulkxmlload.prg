@@ -154,12 +154,7 @@ if ascan(laFields, 'C', -1, -1, 2, 7) > 0 or ;
 				lcField + ', ' + XML_ILLEGAL_CHARS + ;
 				", '') FOR NOT EMPTY(" + ;
 				iif(lcType = 'M', 'RTRIM(' + lcField + ')', lcField) + ')'
-try
 			&lcReplaceCommand
-catch to loException
-messagebox(tcAlias + chr(13) + lcReplaceCommand)
-set step on 
-endtry
 		endif inlist(lcType, 'C', 'M', 'V') ...
 	next lnI
 endif ascan(laFields ...
@@ -242,8 +237,6 @@ do while lnRecsProcessed < reccount()
 			loBulkLoad.Execute(lcSchema, lcData)
 		catch to loException
 			lcReturn = loException.Message
-messagebox(lcReturn)
-set step on 
 		endtry
 	endif empty(lcReturn)
 	lnRecsProcessed = lnRecsProcessed + lnRecords

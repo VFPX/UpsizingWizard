@@ -1931,7 +1931,6 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
 				case llDone
                 CASE lcExportType = "BULKINSERT" AND THIS.Perm_Database
                     * jvf Use SQL 7's BULK INSERT technique
-messagebox('Bulk insert for ' + lcTableName)
                     lnExportErrors=THIS.BulkInsert(lcTableName, lcCursorName, ;
                         lcRmtTableName, @llMaxErrExceeded)
                     IF (lnExportErrors == -1) THEN
@@ -1941,12 +1940,10 @@ messagebox('Bulk insert for ' + lcTableName)
                 CASE lcExportType = "FASTEXPORT" AND THIS.Perm_Sproc AND ;
                         (!ll255 OR (THIS.ServerType="Oracle" OR THIS.ServerVer<7)) AND !TStampAdd
                     *go fast if possible and user can create sprocs
-messagebox('Fast insert for ' + lcTableName)
                     lnExportErrors=THIS.FastExport(lcTableName, lcCursorName, lcRmtTableName, @llMaxErrExceeded)
                 OTHERWISE
 *** 11/20/2012: pass .T. to JimExport so it updates the thermometer
 ***                    lnExportErrors=THIS.JimExport(lcTableName, lcCursorName, lcRmtTableName, @llMaxErrExceeded)
-messagebox('Jim insert for ' + lcTableName)
                     lnExportErrors=THIS.JimExport(lcTableName, lcCursorName, lcRmtTableName, @llMaxErrExceeded, '', .T.)
             ENDCASE
 
