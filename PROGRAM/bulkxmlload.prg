@@ -2,7 +2,7 @@
 * Function:			BulkXMLLoad
 * Purpose:			Performs a SQL Server bulk XML load
 * Author:			Doug Hennig
-* Last revision:	01/24/2019
+* Last revision:	02/01/2019
 * Parameters:		tcAlias      - the alias of the cursor to export
 *					tcTable      - the name of the table to import into
 *					ttBlank      - the value to use for blank DateTime values
@@ -88,13 +88,14 @@ local lnSelect, ;
 	loBulkLoad
 #include ..\Include\AllDefs.H
 
-* These characters are illegal according to the XML 1.0 specification. CHR(0)
-* is also illegal, but we're leaving that alone because they may be situations
-* where someone intentionally stores that.
+* These characters are illegal according to the XML 1.0 specification.
 
-#define XML_ILLEGAL_CHARS	CHR(1)+CHR(2)+CHR(3)+CHR(4)+CHR(5)+CHR(6)+CHR(7)+CHR(8)+CHR(11)+CHR(12)+ ;
-							CHR(14)+CHR(15)+CHR(16)+CHR(17)+CHR(18)+CHR(19)+CHR(20)+CHR(21)+CHR(22)+ ;
-							CHR(23)+CHR(24)+CHR(25)+CHR(26)+CHR(27)+CHR(28)+CHR(29)+CHR(30)+CHR(31)
+#define XML_ILLEGAL_CHARS	'chr(0)+chr(1)+chr(2)+chr(3)+chr(4)+chr(5)+' + ;
+							'chr(6)+chr(7)+chr(8)+chr(11)+chr(12)+chr(14)+' + ;
+							'chr(15)+chr(16)+chr(17)+chr(18)+chr(19)+' + ;
+							'chr(20)+chr(21)+chr(22)+chr(23)+chr(24)+' + ;
+							'chr(25)+chr(26)+chr(27)+chr(28)+chr(29)+' + ;
+							'chr(30)+chr(31)'
 
 * If there are any date fields in the selected cursor and we're not supposed to
 * upsize blank dates as NULL, create a cursor from it with the appropriate
@@ -142,17 +143,23 @@ if ascan(laFields, 'C', -1, -1, 2, 7) > 0 or ;
 * Loop through the non-NOCPTRANS string fields and strip out any illegal
 * characters. This assumes that those characters were not entered
 * intentionally and that we do not need to substitute something else for the
-* characters being removed.
+* characters being removed. Note: the reason "(lcField)" is used is to prevent
+* an error if the field name is a reserved word like "FROM".
 
 	for lnI = 1 to lnFields
 		lcField = laFields[lnI, 1]
 		lcType  = laFields[lnI, 2]
 		if inlist(lcType, 'C', 'M', 'V') and not laFields[lnI, 6]
-			lcReplaceCommand = 'REPLACE ' + lcField + ' WITH CHRTRAN(' + ;
-				lcField + ", '" + XML_ILLEGAL_CHARS + ;
-				"', '') FOR NOT EMPTY(" + ;
+			lcReplaceCommand = 'REPLACE (lcField) WITH CHRTRAN(' + ;
+				lcField + ', ' + XML_ILLEGAL_CHARS + ;
+				", '') FOR NOT EMPTY(" + ;
 				iif(lcType = 'M', 'RTRIM(' + lcField + ')', lcField) + ')'
+try
 			&lcReplaceCommand
+catch to loException
+messagebox(tcAlias + chr(13) + lcReplaceCommand)
+set step on 
+endtry
 		endif inlist(lcType, 'C', 'M', 'V') ...
 	next lnI
 endif ascan(laFields ...
@@ -235,6 +242,8 @@ do while lnRecsProcessed < reccount()
 			loBulkLoad.Execute(lcSchema, lcData)
 		catch to loException
 			lcReturn = loException.Message
+messagebox(lcReturn)
+set step on 
 		endtry
 	endif empty(lcReturn)
 	lnRecsProcessed = lnRecsProcessed + lnRecords

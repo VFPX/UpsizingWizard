@@ -377,7 +377,7 @@ upsize will be reset." + CHR(10) + CHR(13) + CHR(10) + CHR(13)+ "Continue?"
 #DEFINE THIS_VIEW_LOC			"View '|1'"
 
 #DEFINE DEXPORT_FAILED_LOC		"Data export halted because of export errors."
-#DEFINE SOME_ERRS_LOC			"|1 records not exported successfully."
+#DEFINE SOME_ERRS_LOC			"|1 records not exported successfully for |2."
 #DEFINE DATA_EXPORT_LOC			"Data export"
 #DEFINE CLUSTER_LOC				"Cluster"
 #DEFINE TABLE_LOC				"Table"

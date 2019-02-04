@@ -29,6 +29,8 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
 
     *ODBC-related properties
     MasterConnHand=0
+*** DH 2019-01-29: added new property
+	DisconnectOnExit = .T.
     CONNECTSTRING=""
     DataSourceName=""
     ServerType="SQL Server"
@@ -243,8 +245,10 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
 		cDir = Sys(16)
 		cDir = FullPath(Addbs(justpath(substr(m.cDir, atc(' ', m.cDir, 2) + 1))) + '..\')
 			&& upsizing wizard root folder
+*** 2019-02-01: include program folder in path
 		if Empty(_VFP.StartMode) and not lower(m.cDir) + 'data' $ lower(set('PATH'))
-			set path to (m.cDir + 'data;' + m.cDir + 'program;') additive
+***			set path to (m.cDir + 'data;' + m.cDir + 'program;') additive
+			set path to (m.cDir + ';' + m.cDir + 'data;' + m.cDir + 'program;') additive
 		endif
 *** 2015-11-30 DH: end of new code
 	endfunc
@@ -530,7 +534,9 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
 *        ENDIF
 
         *Connection cleanup
-        IF THIS.MasterConnHand>0 THEN
+*** DH 2019-01-29: only disconnect if DisconnectOnExit is .T.
+***        IF THIS.MasterConnHand>0 THEN
+        if This.MasterConnHand > 0 and This.DisconnectOnExit
             SQLDISCONN(THIS.MasterConnHand)
         ENDIF
 
@@ -1909,8 +1915,8 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
             * jvf 1/9/01 SQL >= 7 can handle 1024 SP Parameters. Handled in Case below.
             ll255=(MAX_PARAMS=THIS.CountFields(lcCursorName))
 
-* If we're upsizing to SQL Server 2005 or later, try to do a bulk XML import
-* since it's way faster.
+* If we're upsizing to SQL Server 2005 or later, try to do a bulk SQL copy or
+* XML import since they're way faster.
 
 			if This.SQLServer and This.ServerVer >= 9
 				llDone = This.BulkXMLLoad(lcTableName, lcCursorName, ;
@@ -1925,6 +1931,7 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
 				case llDone
                 CASE lcExportType = "BULKINSERT" AND THIS.Perm_Database
                     * jvf Use SQL 7's BULK INSERT technique
+messagebox('Bulk insert for ' + lcTableName)
                     lnExportErrors=THIS.BulkInsert(lcTableName, lcCursorName, ;
                         lcRmtTableName, @llMaxErrExceeded)
                     IF (lnExportErrors == -1) THEN
@@ -1934,10 +1941,12 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
                 CASE lcExportType = "FASTEXPORT" AND THIS.Perm_Sproc AND ;
                         (!ll255 OR (THIS.ServerType="Oracle" OR THIS.ServerVer<7)) AND !TStampAdd
                     *go fast if possible and user can create sprocs
+messagebox('Fast insert for ' + lcTableName)
                     lnExportErrors=THIS.FastExport(lcTableName, lcCursorName, lcRmtTableName, @llMaxErrExceeded)
                 OTHERWISE
 *** 11/20/2012: pass .T. to JimExport so it updates the thermometer
 ***                    lnExportErrors=THIS.JimExport(lcTableName, lcCursorName, lcRmtTableName, @llMaxErrExceeded)
+messagebox('Jim insert for ' + lcTableName)
                     lnExportErrors=THIS.JimExport(lcTableName, lcCursorName, lcRmtTableName, @llMaxErrExceeded, '', .T.)
             ENDCASE
 
@@ -1954,6 +1963,8 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
             ELSE
                 IF lnExportErrors<>0 THEN
                     lcErrMsg=STRTRAN(SOME_ERRS_LOC,"|1",LTRIM(STR(lnExportErrors)))
+*** DH 2019-01-30: include table name in message
+					lcErrMsg = strtran(lcErrMsg, '|2', lcTableName)
                     THIS.StoreError(.NULL.,"","",lcErrMsg,lcTableName,DATA_EXPORT_LOC)
                 ENDIF
             ENDIF
@@ -9586,4 +9597,4 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
 		
 		RETURN lcRes
 	ENDPROC
-ENDDEFINE
+ENDDEFINE 

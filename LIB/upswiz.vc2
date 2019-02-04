@@ -4386,7 +4386,9 @@ DEFINE CLASS upsizingwizardform AS basewizardform OF "basewizard.vcx"
 		Combo1.Name = "Combo1", ;
 		lblReportDir.Name = "lblReportDir", ;
 		lblReportOptions.Name = "lblReportOptions", ;
+		lblServerTempFolder.Name = "lblServerTempFolder", ;
 		txtReportDir.Name = "txtReportDir", ;
+		txtServerTempFolder.Name = "txtServerTempFolder", ;
 		Wizlabel1.Name = "Wizlabel1", ;
 		Wizlabel2.Name = "Wizlabel2", ;
 		Wizlabel3.Name = "Wizlabel3", ;
@@ -4538,6 +4540,7 @@ DEFINE CLASS upsizingwizardform AS basewizardform OF "basewizard.vcx"
 		llApp         = upper(justext(lcProgram)) = 'APP'
 		lcMain        = addbs(justpath(iif(llApp, lcProgram, ;
 			fullpath(justpath(lcProgram) + '\..\'))))
+		* The only function the Upsizing Wizard uses in UPSWIZ.FLL is GetSQLServers
 		lcFFLLocation = lcMain + 'UPSWIZ.FLL'
 		if file(lcFFLLocation)
 			try 
@@ -4554,6 +4557,7 @@ DEFINE CLASS upsizingwizardform AS basewizardform OF "basewizard.vcx"
 		
 		if not llApp
 			This.cPath = set('PATH')
+		set step on 
 			lcPath = lcMain + 'program,' + lcMain + 'data,' + lcMain + 'lib'
 			set path to '&lcPath' additive
 		endif not llApp
