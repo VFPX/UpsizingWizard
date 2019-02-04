@@ -105,6 +105,7 @@ with loEngine
 *	NewDir: the directory where the Upsizing Engine places its analysis and
 *		other files
 *	BlankDateValue: the value to use for blank dates (default = 01/01/1900)
+*	DisconnectOnExit: set to .F. to keep the SQL Server connection open afterward
 
 *// Customization: If you want to show the progress of the upsizing, use
 *	something like:
