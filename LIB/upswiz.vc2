@@ -4557,7 +4557,6 @@ DEFINE CLASS upsizingwizardform AS basewizardform OF "basewizard.vcx"
 		
 		if not llApp
 			This.cPath = set('PATH')
-		set step on 
 			lcPath = lcMain + 'program,' + lcMain + 'data,' + lcMain + 'lib'
 			set path to '&lcPath' additive
 		endif not llApp

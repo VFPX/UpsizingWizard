@@ -33,6 +33,9 @@ This Sedna update release includes:
 The Upsizing Wizard is part of [Sedna](https://github.com/VFPX/Sedna), a collection of libraries, samples and add-ons to Visual FoxPro 9.0 SP2.
 
 **2019.02.04 Release**  
+This updates add the reserved word "BULK" to the keywords table and removes some debugging code.
+
+**2019.02.04 Release**  
 This update adds a DisconnectOnExit property to the upsizing engine (the default is .T.) which allows you to keep the connection to SQL Server open after upsizing is completed (such as if you have other tasks to execute). It also handles field names with reserved words and removes CHR(0), which is an illegal XML character, from fields when doing bulk XML load.
 
 **2019.01.24 Release**  
