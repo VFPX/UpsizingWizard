@@ -8470,13 +8470,13 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
         ENDIF
 *** DH 12/15/2014: use only SQL Server rather than variants of it
 ***        IF RTRIM(THIS.ServerType)=="SQL Server95" THEN
-        IF left(THIS.ServerType, 10) = 'SQL Server'
-            lcServerConstraint="SQL Server"
-        ELSE
-            lcServerConstraint=RTRIM(THIS.ServerType)
-        ENDIF
-
 *** DH 2015-09-24: don't filter the KEYWORDS table on server type
+***        IF left(THIS.ServerType, 10) = 'SQL Server'
+***            lcServerConstraint="SQL Server"
+***        ELSE
+***            lcServerConstraint=RTRIM(THIS.ServerType)
+***        ENDIF
+
 ***        SET FILTER TO ServerType=lcServerConstraint
 
         SEEK lcResult

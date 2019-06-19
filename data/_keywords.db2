@@ -35,26 +35,6 @@
 			<Autoinc_Nextval>0</Autoinc_Nextval>
 			<Autoinc_Step>0</Autoinc_Step>
 		</FIELD>
-		<FIELD>
-			<Name>SERVERTYPE</Name>
-			<Type>C</Type>
-			<Width>12</Width>
-			<Decimals>0</Decimals>
-			<Null>.F.</Null>
-			<NoCPTran>.F.</NoCPTran>
-			<Field_Valid_Exp></Field_Valid_Exp>
-			<Field_Valid_Text></Field_Valid_Text>
-			<Field_Default_Value></Field_Default_Value>
-			<Table_Valid_Exp></Table_Valid_Exp>
-			<Table_Valid_Text></Table_Valid_Text>
-			<LongTableName></LongTableName>
-			<Ins_Trig_Exp></Ins_Trig_Exp>
-			<Upd_Trig_Exp></Upd_Trig_Exp>
-			<Del_Trig_Exp></Del_Trig_Exp>
-			<TableComment></TableComment>
-			<Autoinc_Nextval>0</Autoinc_Nextval>
-			<Autoinc_Step>0</Autoinc_Step>
-		</FIELD>
 	</FIELDS>
 
 
@@ -77,1407 +57,1130 @@
 
 		<RECORD>
 			<KEYWORD>access</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>add</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>admin</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>after</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>all</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>allocate</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>alter</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>analyze</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>and</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>any</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>archive</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>archivelog</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>as</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>asc</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>audit</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>authorization</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>avg</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>backup</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>become</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>before</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>begin</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>between</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>block</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>body</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>by</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>cache</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>cancel</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>cascade</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>change</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>char</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>character</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>check</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>checkpoint</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>close</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>cluster</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>cobol</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>column</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>comment</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>commit</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>compile</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>compress</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>connect</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>constraint</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>constraints</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>contents</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>continue</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>controlfile</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>count</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>create</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>current</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>cursor</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>cycle</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>database</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>datafile</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>date</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>dba</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>dec</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>decimal</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>declare</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>default</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>delete</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>desc</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>disable</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>dismount</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>distinct</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>double</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>drop</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>dump</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>each</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>else</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>enable</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>end</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>escape</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>events</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>except</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>exceptions</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>exclusive</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>exec</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>execute</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>exists</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>explain</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>extent</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>externally</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>fetch</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>file</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>float</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>flush</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>for</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>force</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>foreign</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>fortran</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>found</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>freelist</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>freelists</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>from</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>function</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>go</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>goto</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>grant</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>group</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>groups</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>having</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>identified</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>immediate</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>in</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>including</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>increment</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>index</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>indicator</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>initial</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>initrans</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>insert</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>instance</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>int</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>integer</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>intersect</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>into</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>is</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>key</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>language</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>layer</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>level</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>like</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>link</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>lists</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>lock</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>logfile</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>long</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>manage</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>manual</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>max</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>maxdatafiles</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>maxextents</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>maxinstances</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>maxlogfiles</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>maxloghistory</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>maxlogmembers</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>maxtrans</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>maxvalue</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>min</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>minextents</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>minus</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>minvalue</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>mode</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>modify</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>module</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>mount</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>new</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>next</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>noarchivelog</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>noaudit</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>nocache</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>nocompress</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>nocycle</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>nomaxvalue</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>nominvalue</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>none</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>noorder</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>noresetlogs</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>normal</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>nosort</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>not</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>nowait</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>null</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>number</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>numberic</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>of</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>off</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>offline</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>old</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>on</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>online</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>only</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>open</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>optimal</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>option</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>or</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>order</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>own</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>package</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>parallel</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>pascal</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>pctfree</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>pctincrease</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>pctused</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>plan</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>pli</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>precision</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>primary</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>prior</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>private</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>privileges</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>procedure</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>profile</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>public</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>quota</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>raw</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>read</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>real</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>recover</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>references</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>referencing</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>rename</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>resetlogs</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>resource</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>restricted</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>reuse</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>revoke</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>role</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>roles</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>rollback</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>row</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>rowid</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>rowlabel</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>rownum</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>rows</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>savepoint</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>schema</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>scn</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>section</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>segment</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>select</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>sequence</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>session</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>set</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>share</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>shared</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>size</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>smallint</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>snapshot</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>some</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>sort</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>sql</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>sqlcode</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>sqlerror</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>start</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>statement_id</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>statistics</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>stop</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>storage</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>sum</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>switch</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>synonym</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>sysdate</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>system</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>table</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>tables</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>tablespace</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>temporary</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>then</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>thread</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>time</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>to</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>tracing</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>transaction</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>trigger</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>triggers</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>truncate</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>uid</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>under</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>union</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>unique</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>unlimited</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>until</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>update</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>use</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>user</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>using</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>validate</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>values</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>varchar</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>varchar2</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>view</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>when</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>whenever</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>where</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>with</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>work</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>write</KEYWORD>
-			<SERVERTYPE>Oracle</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>nullif</KEYWORD>
-			<SERVERTYPE>SQL Server</SERVERTYPE>
 		</RECORD>
 
 		<RECORD>
 			<KEYWORD>bulk</KEYWORD>
-			<SERVERTYPE>SQL Server</SERVERTYPE>
+		</RECORD>
+
+		<RECORD>
+			<KEYWORD>tran</KEYWORD>
 		</RECORD>
 
 	</RECORDS>
