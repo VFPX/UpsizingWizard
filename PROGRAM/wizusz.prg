@@ -575,8 +575,11 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
 *        =CURSORSETPROP('FetchMemo', THIS.FETCHMEMO, 0)
 
         *- save messagebox until we've have finished clearnup
-        IF !EMPTY(THIS.cFinishMsg) and not This.lQuiet
-            =MESSAGEBOX(THIS.cFinishMsg, ICON_EXCLAMATION, TITLE_TEXT_LOC)
+*** DH 2019-08-28: don't use MESSAGEBOX but raise UpsizingComplete instead
+*        IF !EMPTY(THIS.cFinishMsg) and not This.lQuiet
+*            =MESSAGEBOX(THIS.cFinishMsg, ICON_EXCLAMATION, TITLE_TEXT_LOC)
+        IF !EMPTY(THIS.cFinishMsg)
+            raiseevent(This, 'UpsizingComplete', THIS.cFinishMsg)
         ENDIF
 
         WizEngineAll::DESTROY
@@ -756,7 +759,9 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
 	endfunc
 	function UpdateProcess(tnProgress, tcTask)
 	endfunc
-	function CompleteProcess
+	function CompleteProcess()
+	endfunc
+	function UpsizingComplete(tcMessage)
 	endfunc
 
     PROCEDURE UpDateTherm

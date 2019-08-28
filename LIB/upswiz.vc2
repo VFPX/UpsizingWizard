@@ -3964,6 +3964,7 @@ DEFINE CLASS upsizingwizardform AS basewizardform OF "basewizard.vcx"
 		*m: initprocess		&& Initialize the progress bar for a process
 		*m: setsourcedatabase		&& Sets cSourceDatabase to the specified value
 		*m: updateprocess		&& Update the progress bar for a process
+		*m: upsizecomplete		&& Fired when the upsizing is complete
 		*p: cconnection		&& The connection to use
 		*p: cconnectiondatabase		&& The database to use for connections
 		*p: cconnstring		&& The connection string to use
@@ -4074,6 +4075,7 @@ DEFINE CLASS upsizingwizardform AS basewizardform OF "basewizard.vcx"
 		<memberdata name="updateprocess" type="method" display="UpdateProcess"/>
 		<memberdata name="completeprocess" type="method" display="CompleteProcess"/>
 		<memberdata name="setsourcedatabase" type="method" display="SetSourceDatabase"/>
+		<memberdata name="upsizecomplete" display="UpsizeComplete"/>
 		</VFPData>
 	cboSteps.Height = 22
 	cboSteps.Left = 160
@@ -4505,9 +4507,10 @@ DEFINE CLASS upsizingwizardform AS basewizardform OF "basewizard.vcx"
 		with This
 			.oEngine.NormalShutdown   = .T.
 			.oEngine.NotUseBulkInsert = not .lUseBulkInsert
-			bindevent(.oEngine, 'InitProcess',     This, 'InitProcess')
-			bindevent(.oEngine, 'UpdateProcess',   This, 'UpdateProcess')
-			bindevent(.oEngine, 'CompleteProcess', This, 'CompleteProcess')
+			bindevent(.oEngine, 'InitProcess',      This, 'InitProcess')
+			bindevent(.oEngine, 'UpdateProcess',    This, 'UpdateProcess')
+			bindevent(.oEngine, 'CompleteProcess',  This, 'CompleteProcess')
+			bindevent(.oEngine, 'UpsizingComplete', This, 'UpsizeComplete')
 			.oEngine.ProcessOutput()
 		endwith
 		This.Release()
@@ -4751,6 +4754,12 @@ DEFINE CLASS upsizingwizardform AS basewizardform OF "basewizard.vcx"
 	PROCEDURE updateprocess		&& Update the progress bar for a process
 		lparameters tnProgress, tcTask
 		This.pgfWizard.BasePage6.oProgress.UpdateProcess(tnProgress, tcTask)
+		
+	ENDPROC
+
+	PROCEDURE upsizecomplete		&& Fired when the upsizing is complete
+		lparameters tcMessage
+		messagebox(tcMessage, 0, This.Caption)
 		
 	ENDPROC
 
