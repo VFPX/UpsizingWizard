@@ -3577,6 +3577,9 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
 *** DH 2015-09-25: strip brackets in name
 ***                        lcRmtName = "UQ_" + THIS.UniqueTableName(lcRmtTable)
                         lcRmtName = "UQ_" + THIS.UniqueTableName(chrtran(lcRmtTable, '[]', ''))
+*** DH 2020-02-19: Add field name so we can have multiple unique indexes per
+*** table per Gerhard Schmidbauer.
+                        lcRmtName = lcRmtName + "_" + chrtran(lcExpr, '[]', '')
                     ELSE &&Primary Key
 *** DH 2015-09-25: strip brackets in name
 ***                        lcRmtName = "PK_" + lcRmtTable
@@ -5208,10 +5211,11 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
 						case This.ExportDefaults and ;
                     		not empty(lcDefaultExpression)
 *** DH 2015-09-08: pass remote field name to ConvertToDefault
+*** DH 2020-04-01: use delimiters on remote field name
 *							lcRemoteDefault = This.ConvertToDefault(lcDefaultExpression, ;
 								lcFldName, lcTableName, lcRmtTableName, ;
 								@lcRemoteDefaultName)
-							lcRmtFldName = RTRIM(&lcEnumFields..RmtFldName)
+							lcRmtFldName = '[' + RTRIM(&lcEnumFields..RmtFldName) + ']'
 							lcRemoteDefault = This.ConvertToDefault(lcDefaultExpression, ;
 								lcFldName, lcTableName, lcRmtTableName, lcRmtFldName, ;
 								@lcRemoteDefaultName)
