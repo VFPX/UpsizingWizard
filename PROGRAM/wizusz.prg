@@ -2038,11 +2038,14 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
 		This.InitTherm(SEND_DATA_LOC, 100)
 		lcMsg = strtran(THIS_TABLE_LOC, '|1', tcTableName)
 		This.UpDateTherm(0, lcMsg)
-		llReturn = empty(BulkXMLLoad(tcCursorName, tcRmtTableName, ;
+		lcReturn = BulkXMLLoad(tcCursorName, tcRmtTableName, ;
 			This.BlankDateValue, This.ServerDBName, lcServer, lcUserName, ;
-			lcPassword, alltrim(This.ServerTempFolder)))
+			lcPassword, alltrim(This.ServerTempFolder))
+		llReturn = empty(lcReturn)
 		if llReturn
 			raiseevent(This, 'CompleteProcess')
+		else
+			raiseevent(This, 'UpdateProcess', 0, lcReturn)
 		endif llReturn
 		return llReturn
 	endfunc
@@ -5212,10 +5215,15 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
                     		not empty(lcDefaultExpression)
 *** DH 2015-09-08: pass remote field name to ConvertToDefault
 *** DH 2020-04-01: use delimiters on remote field name
+*** DH 2020-05-13: only add delimiters to remote field name if not already there
 *							lcRemoteDefault = This.ConvertToDefault(lcDefaultExpression, ;
 								lcFldName, lcTableName, lcRmtTableName, ;
 								@lcRemoteDefaultName)
-							lcRmtFldName = '[' + RTRIM(&lcEnumFields..RmtFldName) + ']'
+							lcRmtFldName = RTRIM(&lcEnumFields..RmtFldName)
+							if left(lcRmtFldName, 1) <> '['
+								lcRmtFldName = '[' + lcRmtFldName + ']'
+							endif left(lcRmtFldName, 1) <> '['
+*** DH 2020-05-13: end of new code
 							lcRemoteDefault = This.ConvertToDefault(lcDefaultExpression, ;
 								lcFldName, lcTableName, lcRmtTableName, lcRmtFldName, ;
 								@lcRemoteDefaultName)

@@ -2,7 +2,7 @@
 * Function:			BulkXMLLoad
 * Purpose:			Performs a SQL Server bulk XML load
 * Author:			Doug Hennig
-* Last revision:	02/01/2019
+* Last revision:	04/06/2020
 * Parameters:		tcAlias      - the alias of the cursor to export
 *					tcTable      - the name of the table to import into
 *					ttBlank      - the value to use for blank DateTime values
@@ -219,6 +219,7 @@ do while lnRecsProcessed < reccount()
 			loBulkLoad.ConnectionString = lcConnString
 			loBulkLoad.KeepNulls        = .T.
 			loBulkLoad.ForceTableLock   = .T.
+			loBulkLoad.ErrorLogFile     = 'BulkXMLLoadErrors.txt'
 
 * Turn on transaction processing for the bulk load. This allows the XML bulk
 * load to succeed when you have blank string fields and do not allow NULL

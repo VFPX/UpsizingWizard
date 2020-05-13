@@ -86,13 +86,13 @@ WITH loProject.FILES
 	.ADD('lib\sfprogressbar.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzU5MDBPNVo2TQ==" />
 	.ADD('lib\upswiz.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzU5MDBPNVo0Rw==" />
 	.ADD('lib\vfpctrls.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzU5MDBPNVo2Sw==" />
-	.ADD('program\bulkxmlload.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVHTjBVUFZHNw==" />
-	.ADD('program\foxresource.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVHTjBVUFZGVQ==" />
-	.ADD('program\main.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVHTjBVUFZGWQ==" />
-	.ADD('program\upswzfunc.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVHTjBVUFZFOA==" />
-	.ADD('program\wizjoin.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVHTjBVUFZEMg==" />
-	.ADD('program\wizusz.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVHTjBVUFZGVg==" />
-	.ADD('program\wzengine.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVHTjBVUFZDVw==" />
+	.ADD('program\bulkxmlload.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVRUDBSUElLSw==" />
+	.ADD('program\foxresource.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVRUDBSUElKSg==" />
+	.ADD('program\main.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVRUDBSUElLRg==" />
+	.ADD('program\upswzfunc.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVRUDBSUElJRg==" />
+	.ADD('program\wizjoin.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVRUDBSUElJQg==" />
+	.ADD('program\wizusz.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVRUDBSUElLRA==" />
+	.ADD('program\wzengine.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVRUDBSUElJNw==" />
 	.ADD('upswiz.fll')		&& *< FileMetadata: Type="L" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzU5MDBPNVoxWg==" />
 	*</BuildProj>
 
