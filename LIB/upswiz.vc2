@@ -4077,25 +4077,6 @@ DEFINE CLASS upsizingwizardform AS basewizardform OF "basewizard.vcx"
 		<memberdata name="setsourcedatabase" type="method" display="SetSourceDatabase"/>
 		<memberdata name="upsizecomplete" display="UpsizeComplete"/>
 		</VFPData>
-	cboSteps.Height = 22
-	cboSteps.Left = 160
-	cboSteps.Name = "cboSteps"
-	cboSteps.Top = 20
-	cboSteps.Width = 600
-	cmdBack.Left = 525
-	cmdBack.Name = "cmdBack"
-	cmdBack.Top = 465
-	cmdCancel.Left = 445
-	cmdCancel.Name = "cmdCancel"
-	cmdCancel.Top = 465
-	cmdFinish.Left = 685
-	cmdFinish.Name = "cmdFinish"
-	cmdFinish.Top = 465
-	cmdHelp.Name = "cmdHelp"
-	cmdHelp.Top = 465
-	cmdNext.Left = 605
-	cmdNext.Name = "cmdNext"
-	cmdNext.Top = 465
 	pgfWizard.BASEPAGE1.Name = "BASEPAGE1"
 	pgfWizard.Basepage2.Caption = "Basepage2"
 	pgfWizard.Basepage2.Name = "Basepage2"
@@ -4113,6 +4094,25 @@ DEFINE CLASS upsizingwizardform AS basewizardform OF "basewizard.vcx"
 	pgfWizard.PageCount = 6
 	pgfWizard.Top = 0
 	pgfWizard.Width = 770
+	cmdHelp.Name = "cmdHelp"
+	cmdHelp.Top = 465
+	cmdCancel.Left = 445
+	cmdCancel.Name = "cmdCancel"
+	cmdCancel.Top = 465
+	cmdBack.Left = 525
+	cmdBack.Name = "cmdBack"
+	cmdBack.Top = 465
+	cmdNext.Left = 605
+	cmdNext.Name = "cmdNext"
+	cmdNext.Top = 465
+	cmdFinish.Left = 685
+	cmdFinish.Name = "cmdFinish"
+	cmdFinish.Top = 465
+	cboSteps.Height = 22
+	cboSteps.Left = 160
+	cboSteps.Name = "cboSteps"
+	cboSteps.Top = 20
+	cboSteps.Width = 600
 	shpSeparator.Name = "shpSeparator"
 	shpSeparator.Top = 450
 	shpSeparator.Width = 750
@@ -4121,9 +4121,9 @@ DEFINE CLASS upsizingwizardform AS basewizardform OF "basewizard.vcx"
 		Left = 160, ;
 		Name = "ChooseSourceDB", ;
 		Top = 95, ;
-		CMDOPEN.Name = "CMDOPEN", ;
+		WIZLABEL1.Name = "WIZLABEL1", ;
 		LSTLIST.Name = "LSTLIST", ;
-		WIZLABEL1.Name = "WIZLABEL1"
+		CMDOPEN.Name = "CMDOPEN"
 		*< END OBJECT: ClassLib="upswiz.vcx" BaseClass="container" />
 
 	ADD OBJECT 'pgfWizard.BASEPAGE1.Image1' AS baseimage WITH ;
@@ -4148,21 +4148,6 @@ DEFINE CLASS upsizingwizardform AS basewizardform OF "basewizard.vcx"
 		Left = 160, ;
 		Name = "Cconnstr", ;
 		Top = 65, ;
-		CHKUSETC.Alignment = 0, ;
-		CHKUSETC.Name = "CHKUSETC", ;
-		CMBCONNECTIONS.Name = "CMBCONNECTIONS", ;
-		CMBDSN.Name = "CMBDSN", ;
-		CMBSERVERS.Name = "CMBSERVERS", ;
-		CMDGETDBC.Name = "CMDGETDBC", ;
-		EDTDATABASE.Name = "EDTDATABASE", ;
-		EDTUSERCONNSTR.Name = "EDTUSERCONNSTR", ;
-		LBLCONNECTIONS.Name = "LBLCONNECTIONS", ;
-		LBLDSN.Name = "LBLDSN", ;
-		LBLDSNPASSWORD.Name = "LBLDSNPASSWORD", ;
-		LBLDSNUSERNAME.Name = "LBLDSNUSERNAME", ;
-		LBLSERVERPWD.Name = "LBLSERVERPWD", ;
-		LBLSERVERS.Name = "LBLSERVERS", ;
-		LBLSERVERUID.Name = "LBLSERVERUID", ;
 		OPGCONNECTION.baseoptionbutton1.Left = 5, ;
 		OPGCONNECTION.baseoptionbutton1.Name = "baseoptionbutton1", ;
 		OPGCONNECTION.baseoptionbutton1.Top = 5, ;
@@ -4180,10 +4165,25 @@ DEFINE CLASS upsizingwizardform AS basewizardform OF "basewizard.vcx"
 		OPGODBCTYPE.Baseoptionbutton3.Name = "Baseoptionbutton3", ;
 		OPGODBCTYPE.Baseoptionbutton3.Top = 164, ;
 		OPGODBCTYPE.Name = "OPGODBCTYPE", ;
-		TXTDSNPASSWORD.Name = "TXTDSNPASSWORD", ;
+		EDTDATABASE.Name = "EDTDATABASE", ;
+		CMDGETDBC.Name = "CMDGETDBC", ;
+		CMBCONNECTIONS.Name = "CMBCONNECTIONS", ;
+		LBLCONNECTIONS.Name = "LBLCONNECTIONS", ;
+		CMBDSN.Name = "CMBDSN", ;
+		LBLDSN.Name = "LBLDSN", ;
 		TXTDSNUSERNAME.Name = "TXTDSNUSERNAME", ;
+		TXTDSNPASSWORD.Name = "TXTDSNPASSWORD", ;
+		LBLDSNUSERNAME.Name = "LBLDSNUSERNAME", ;
+		LBLDSNPASSWORD.Name = "LBLDSNPASSWORD", ;
+		CMBSERVERS.Name = "CMBSERVERS", ;
+		LBLSERVERS.Name = "LBLSERVERS", ;
+		TXTSERVERUID.Name = "TXTSERVERUID", ;
 		TXTSERVERPWD.Name = "TXTSERVERPWD", ;
-		TXTSERVERUID.Name = "TXTSERVERUID"
+		LBLSERVERUID.Name = "LBLSERVERUID", ;
+		LBLSERVERPWD.Name = "LBLSERVERPWD", ;
+		EDTUSERCONNSTR.Name = "EDTUSERCONNSTR", ;
+		CHKUSETC.Alignment = 0, ;
+		CHKUSETC.Name = "CHKUSETC"
 		*< END OBJECT: ClassLib="upswiz.vcx" BaseClass="container" />
 
 	ADD OBJECT 'pgfWizard.Basepage2.Image1' AS baseimage WITH ;
@@ -4208,10 +4208,6 @@ DEFINE CLASS upsizingwizardform AS basewizardform OF "basewizard.vcx"
 		Top = 100, ;
 		cboDatabases.Name = "cboDatabases", ;
 		cboDatabases.ZOrderSet = 0, ;
-		lblDBExists.Name = "lblDBExists", ;
-		lblDBExists.ZOrderSet = 3, ;
-		lblDescription.Name = "lblDescription", ;
-		lblDescription.ZOrderSet = 2, ;
 		opgNewOrExisting.baseoptionbutton1.Left = 5, ;
 		opgNewOrExisting.baseoptionbutton1.Name = "baseoptionbutton1", ;
 		opgNewOrExisting.baseoptionbutton1.Top = 5, ;
@@ -4220,6 +4216,10 @@ DEFINE CLASS upsizingwizardform AS basewizardform OF "basewizard.vcx"
 		opgNewOrExisting.baseoptionbutton2.Top = 23, ;
 		opgNewOrExisting.Name = "opgNewOrExisting", ;
 		opgNewOrExisting.ZOrderSet = 1, ;
+		lblDescription.Name = "lblDescription", ;
+		lblDescription.ZOrderSet = 2, ;
+		lblDBExists.Name = "lblDBExists", ;
+		lblDBExists.ZOrderSet = 3, ;
 		txtNewDatabaseName.Name = "txtNewDatabaseName", ;
 		txtNewDatabaseName.ZOrderSet = 4
 		*< END OBJECT: ClassLib="upswiz.vcx" BaseClass="container" />
@@ -4245,7 +4245,6 @@ DEFINE CLASS upsizingwizardform AS basewizardform OF "basewizard.vcx"
 		Left = 300, ;
 		Name = "Cfieldtypemap", ;
 		Top = 170, ;
-		cmdReset.Name = "cmdReset", ;
 		grdTypeMap.grcFldName.Header1.Name = "Header1", ;
 		grdTypeMap.grcFldName.Name = "grcFldName", ;
 		grdTypeMap.grcRmtLength.Header1.Name = "Header1", ;
@@ -4263,7 +4262,8 @@ DEFINE CLASS upsizingwizardform AS basewizardform OF "basewizard.vcx"
 		grdTypeMap.grcRmtType.Name = "grcRmtType", ;
 		grdTypeMap.grcType.Header1.Name = "Header1", ;
 		grdTypeMap.grcType.Name = "grcType", ;
-		grdTypeMap.Name = "grdTypeMap"
+		grdTypeMap.Name = "grdTypeMap", ;
+		cmdReset.Name = "cmdReset"
 		*< END OBJECT: ClassLib="upswiz.vcx" BaseClass="container" />
 
 	ADD OBJECT 'pgfWizard.Basepage4.Cfieldtypemap.grdTypeMap.grcFldName.Basetextbox1' AS basetextbox WITH ;
@@ -4299,16 +4299,6 @@ DEFINE CLASS upsizingwizardform AS basewizardform OF "basewizard.vcx"
 		Left = 10, ;
 		Name = "cTableList", ;
 		Top = 155, ;
-		chkIdentAdd.Alignment = 0, ;
-		chkIdentAdd.Name = "chkIdentAdd", ;
-		chkTables.Alignment = 0, ;
-		chkTables.Name = "chkTables", ;
-		chkTStampAdd.Alignment = 0, ;
-		chkTStampAdd.Name = "chkTStampAdd", ;
-		chkViews.Alignment = 0, ;
-		chkViews.Name = "chkViews", ;
-		cmdDeselectAll.Name = "cmdDeselectAll", ;
-		cmdSelectAll.Name = "cmdSelectAll", ;
 		grdTable.Column1.Check1.Alignment = 2, ;
 		grdTable.Column1.Check1.Name = "Check1", ;
 		grdTable.Column1.Header1.Name = "Header1", ;
@@ -4324,7 +4314,17 @@ DEFINE CLASS upsizingwizardform AS basewizardform OF "basewizard.vcx"
 		grdTable.COLUMN4.Check1.Name = "Check1", ;
 		grdTable.COLUMN4.Header1.Name = "Header1", ;
 		grdTable.COLUMN4.Name = "COLUMN4", ;
-		grdTable.Name = "grdTable"
+		grdTable.Name = "grdTable", ;
+		cmdSelectAll.Name = "cmdSelectAll", ;
+		cmdDeselectAll.Name = "cmdDeselectAll", ;
+		chkTables.Alignment = 0, ;
+		chkTables.Name = "chkTables", ;
+		chkViews.Alignment = 0, ;
+		chkViews.Name = "chkViews", ;
+		chkTStampAdd.Alignment = 0, ;
+		chkTStampAdd.Name = "chkTStampAdd", ;
+		chkIdentAdd.Alignment = 0, ;
+		chkIdentAdd.Name = "chkIdentAdd"
 		*< END OBJECT: ClassLib="upswiz.vcx" BaseClass="container" />
 
 	ADD OBJECT 'pgfWizard.Basepage4.Image1' AS baseimage WITH ;
@@ -4356,46 +4356,46 @@ DEFINE CLASS upsizingwizardform AS basewizardform OF "basewizard.vcx"
 		TabIndex = 4, ;
 		Top = 80, ;
 		ZOrderSet = 1, ;
-		Baselabel1.Name = "Baselabel1", ;
 		Baseshape1.Name = "Baseshape1", ;
-		Baseshape2.Name = "Baseshape2", ;
-		chkBlankDates.Alignment = 0, ;
-		chkBlankDates.Name = "chkBlankDates", ;
-		chkBulkInsert.Alignment = 0, ;
-		chkBulkInsert.Name = "chkBulkInsert", ;
+		Wizshape1.Name = "Wizshape1", ;
+		Wizshape2.Name = "Wizshape2", ;
+		chkValidation.Alignment = 0, ;
+		chkValidation.Name = "chkValidation", ;
 		chkDefaults.Alignment = 0, ;
 		chkDefaults.Name = "chkDefaults", ;
-		chkExportDRI.Alignment = 0, ;
-		chkExportDRI.Name = "chkExportDRI", ;
 		chkIndexes.Alignment = 0, ;
 		chkIndexes.Name = "chkIndexes", ;
-		chkRelations.Alignment = 0, ;
-		chkRelations.Name = "chkRelations", ;
 		chkRemotizeViews.Alignment = 0, ;
 		chkRemotizeViews.Name = "chkRemotizeViews", ;
-		chkReport.Alignment = 0, ;
-		chkReport.Name = "chkReport", ;
-		chkSavePwd.Alignment = 0, ;
-		chkSavePwd.Name = "chkSavePwd", ;
+		chkRelations.Alignment = 0, ;
+		chkRelations.Name = "chkRelations", ;
+		Baseshape2.Name = "Baseshape2", ;
 		chkStructureOnly.Alignment = 0, ;
 		chkStructureOnly.Name = "chkStructureOnly", ;
 		chkTableToView.Alignment = 0, ;
 		chkTableToView.Name = "chkTableToView", ;
-		chkValidation.Alignment = 0, ;
-		chkValidation.Name = "chkValidation", ;
-		cmdAdvanced.Name = "cmdAdvanced", ;
-		cmdReportDir.Name = "cmdReportDir", ;
+		chkSavePwd.Alignment = 0, ;
+		chkSavePwd.Name = "chkSavePwd", ;
+		chkExportDRI.Alignment = 0, ;
+		chkExportDRI.Name = "chkExportDRI", ;
 		Combo1.Name = "Combo1", ;
-		lblReportDir.Name = "lblReportDir", ;
-		lblReportOptions.Name = "lblReportOptions", ;
-		lblServerTempFolder.Name = "lblServerTempFolder", ;
-		txtReportDir.Name = "txtReportDir", ;
-		txtServerTempFolder.Name = "txtServerTempFolder", ;
-		Wizlabel1.Name = "Wizlabel1", ;
-		Wizlabel2.Name = "Wizlabel2", ;
 		Wizlabel3.Name = "Wizlabel3", ;
-		Wizshape1.Name = "Wizshape1", ;
-		Wizshape2.Name = "Wizshape2"
+		cmdAdvanced.Name = "cmdAdvanced", ;
+		Wizlabel1.Name = "Wizlabel1", ;
+		chkBlankDates.Alignment = 0, ;
+		chkBlankDates.Name = "chkBlankDates", ;
+		Wizlabel2.Name = "Wizlabel2", ;
+		chkBulkInsert.Alignment = 0, ;
+		chkBulkInsert.Name = "chkBulkInsert", ;
+		Baselabel1.Name = "Baselabel1", ;
+		lblReportOptions.Name = "lblReportOptions", ;
+		chkReport.Alignment = 0, ;
+		chkReport.Name = "chkReport", ;
+		txtReportDir.Name = "txtReportDir", ;
+		lblReportDir.Name = "lblReportDir", ;
+		cmdReportDir.Name = "cmdReportDir", ;
+		txtServerTempFolder.Name = "txtServerTempFolder", ;
+		lblServerTempFolder.Name = "lblServerTempFolder"
 		*< END OBJECT: ClassLib="upswiz.vcx" BaseClass="container" />
 
 	ADD OBJECT 'pgfWizard.Basepage5.Image1' AS baseimage WITH ;
@@ -4464,9 +4464,9 @@ DEFINE CLASS upsizingwizardform AS basewizardform OF "basewizard.vcx"
 		TabIndex = 6, ;
 		Top = 190, ;
 		Visible = .F., ;
-		lblTask.Name = "lblTask", ;
+		oProgress.Name = "oProgress", ;
 		LBLTITLE.Name = "LBLTITLE", ;
-		oProgress.Name = "oProgress"
+		lblTask.Name = "lblTask"
 		*< END OBJECT: ClassLib="upswiz.vcx" BaseClass="container" />
 	
 	PROCEDURE analysiscleanup		&& Clean up analysis tables

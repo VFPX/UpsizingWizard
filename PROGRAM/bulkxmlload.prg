@@ -2,7 +2,7 @@
 * Function:			BulkXMLLoad
 * Purpose:			Performs a SQL Server bulk XML load
 * Author:			Doug Hennig
-* Last revision:	04/06/2020
+* Last revision:	08/26/2020
 * Parameters:		tcAlias      - the alias of the cursor to export
 *					tcTable      - the name of the table to import into
 *					ttBlank      - the value to use for blank DateTime values
@@ -254,7 +254,9 @@ enddo while lnRecsProcessed < reccount()
 if llClose
 	use
 endif llClose
-erase (lcSchema)
-erase (lcData)
+if empty(lcReturn)
+	erase (lcSchema)
+	erase (lcData)
+endif empty(lcReturn)
 select (lnSelect)
 return lcReturn

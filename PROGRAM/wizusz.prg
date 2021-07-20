@@ -2045,7 +2045,8 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
 		if llReturn
 			raiseevent(This, 'CompleteProcess')
 		else
-			raiseevent(This, 'UpdateProcess', 0, lcReturn)
+			raiseevent(This, 'UpdateProcess', 0, 'bulk XML load failed: ' + ;
+				lcReturn)
 		endif llReturn
 		return llReturn
 	endfunc
