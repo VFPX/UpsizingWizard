@@ -1,6 +1,6 @@
 # Upsizing Wizard
 
-**Project Manager**: [Doug Hennig](mailto:dhennig@stonefield.com)
+**Project Manager**: [Doug Hennig](mailto:dhennig@stonefieldquery.com)
 
 This is an update to the Visual FoxPro 9.0 SP2 Upsizing Wizard. To launch the wizard run UpsizingWizard.app.
 
@@ -32,51 +32,78 @@ This Sedna update release includes:
 
 The Upsizing Wizard is part of [Sedna](https://github.com/VFPX/Sedna), a collection of libraries, samples and add-ons to Visual FoxPro 9.0 SP2.
 
-**2019.02.04 Release**  
-This updates add the reserved word "BULK" to the keywords table and removes some debugging code.
+Review article on CODE Magazine: [http://www.code-magazine.com/Article.aspx?quickid=0703052](http://www.code-magazine.com/Article.aspx?quickid=0703052)
 
-**2019.02.04 Release**  
-This update adds a DisconnectOnExit property to the upsizing engine (the default is .T.) which allows you to keep the connection to SQL Server open after upsizing is completed (such as if you have other tasks to execute). It also handles field names with reserved words and removes CHR(0), which is an illegal XML character, from fields when doing bulk XML load.
+## Helping with this project
 
-**2019.01.24 Release**  
-This update handles large tables in BulkXMLLoad better by processing records in batches. It also renames the built-in tables Keywords.dbf, ExprMap.dbf, and TypeMap.dbf to have an underscore prefix to avoid conflict with tables using those names in the database to be upsized.
+See [How to contribute to Upsizing Wizard](.github/CONTRIBUTING.md) for details on how to help with this project.
 
-**2017.02.22 Release**  
-This update implements better support for BulkXMLLoad by Mike Potjer.
+## Releases
 
-**2015.12.01 Release**  
-This update implements a couple of pathing issue fixes by Thierry Nivelet.
+### 2019.02.04
 
-**2015.09.28 Release**  
-This update fixes several issues found by Matt Slay and Jim Nelson: the Upsizing Wizard didn't properly handle remote table and field names delimited with square brackets, nor did it automatically delimit names using reserved words such as "order". It also didn't handle the rare case where TypeMap.dbf was missing.
+* This updates add the reserved word "BULK" to the keywords table and removes some debugging code.
 
-**2015.08.20 Release**  
-This update fixes another issue found by Jim Nelson: the settings of CURSOSETPROP("FetchMemo"), SET PROCEDURE, and SET PATH weren't restored after running the Upsizing Wizard.
+### 2019.02.04
 
-**2015.08.18 Release**  
-This update fixes a few bugs found by Jim Nelson: an error when BlankDateValue is set to NULL and NULLDISPLAY is blank, an error when SourceDB is a relative rather than full path, and a warning message when copying files for reporting purposes.
+* This update adds a DisconnectOnExit property to the upsizing engine (the default is .T.) which allows you to keep the connection to SQL Server open after upsizing is completed (such as if you have other tasks to execute).
 
-**2015.01.13 Release**  
-This update fixes a bug found by Matt Slay that caused the precision (decimals) of numeric fields to be incorrect.
+* It also handles field names with reserved words and removes CHR(0), which is an illegal XML character, from fields when doing bulk XML load.
 
-**2013.11.25 Release**  
-This update removes the old license and readme files, which are no longer applicable.
+### 2019.01.24
 
-**2013.11.20 Release**  
-This update fixes a bug, discovered and fixed by Jon Love, that caused a "variable not found" error in the BulkInsert method.
+* This update handles large tables in BulkXMLLoad better by processing records in batches.
 
-**2013.07.24 Release**  
+* It also renames the built-in tables Keywords.dbf, ExprMap.dbf, and TypeMap.dbf to have an underscore prefix to avoid conflict with tables using those names in the database to be upsized.
+
+### 2017.02.22 Release
+
+* This update implements better support for BulkXMLLoad by Mike Potjer.
+
+### 2015.12.01 Release
+
+* This update implements a couple of pathing issue fixes by Thierry Nivelet.
+
+### 2015.09.28
+
+* This update fixes several issues found by Matt Slay and Jim Nelson: the Upsizing Wizard didn't properly handle remote table and field names delimited with square brackets, nor did it automatically delimit names using reserved words such as "order".
+
+* It also didn't handle the rare case where TypeMap.dbf was missing.
+
+### 2015.08.20
+
+* This update fixes another issue found by Jim Nelson: the settings of CURSOSETPROP("FetchMemo"), SET PROCEDURE, and SET PATH weren't restored after running the Upsizing Wizard.
+
+### 2015.08.18
+
+* This update fixes a few bugs found by Jim Nelson: an error when BlankDateValue is set to NULL and NULLDISPLAY is blank, an error when SourceDB is a relative rather than full path, and a warning message when copying files for reporting purposes.
+
+### 2015.01.13
+
+* This update fixes a bug found by Matt Slay that caused the precision (decimals) of numeric fields to be incorrect.
+
+### 2013.11.25
+
+* This update removes the old license and readme files, which are no longer applicable.
+
+### 2013.11.20
+
+* This update fixes a bug, discovered and fixed by Jon Love, that caused a "variable not found" error in the BulkInsert method.
+
+### 2013.07.24 Release
+
 This update has the following bug fixes (thanks to Mike Potjer for finding and even fixing some of these issues):
 
 * Upsizing a logical field to a bit field no longer causes an error when the table has a lot of records.
-
+    
 * You no longer get an error upsizing tables that have field rules, table rules, or triggers.
 
 * Quotes in the content of fields are preserved.
 
 * You no longer get a warning that 6.5 compatibility cannot be used.
 
-**2013.07.02 Release**  
+### 2013.07.02
+
 This update has the following bug fixes (thanks to Mike Potjer for helping with these issues):
 
 * Under some conditions, an error occurred while trying to clean up (specifically removing a working directory the wizard created, which may not be empty) after the wizard is done. This code is now wrapped in a TRY to avoid the error.
@@ -91,7 +118,8 @@ This update has the following bug fixes (thanks to Mike Potjer for helping with 
 
 * Under some conditions, the last few records in a VFP table weren't imported into the SQL Server table. This was fixed.
 
-**2012.12.06 Release**  
+### 2012.12.06
+
 This update has the following bug fixes:
 
 * Handles converting Memo to Varchar(Max)
@@ -107,5 +135,3 @@ This update has the following bug fixes:
 * You no longer get a "string too long" error when using bulk insert with a record with more than 30 MB of data.
 
 * You can now use field names up to 128 characters; the former limit was 30.
-
-Review article on CODE Magazine: [http://www.code-magazine.com/Article.aspx?quickid=0703052](http://www.code-magazine.com/Article.aspx?quickid=0703052)
