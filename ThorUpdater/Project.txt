@@ -1,0 +1,5 @@
+appName = Upsizing Wizard
+appID = UpsizingWizard
+majorVersion = 1.0
+excludeFiles = *.fxp,README.md,*.png,.gitignore,matt_*,*.err,*.zip
+excludeFolders = *ThorUpdater*
