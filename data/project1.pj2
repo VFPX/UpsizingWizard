@@ -33,7 +33,6 @@ _AutoIncrement = "0"
 
 
 *<BuildProj>
-*<.HomeDir = 'D:\VFXDEVELOPMENT\UPSIZINGWIZARD\UPSIZE\' />
 
 FOR EACH loProject IN _VFP.Projects FOXOBJECT
 	loProject.Close()
@@ -50,7 +49,7 @@ MODIFY PROJECT 'project1.pjx' NOWAIT NOSHOW NOPROJECTHOOK
 loProject = _VFP.Projects('project1.pjx')
 
 WITH loProject.FILES
-	.ADD('upsize1.dbc')		&& *< FileMetadata: Type="d" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
+	.ADD('upsize1.dbc')		&& *< FileMetadata: Type="d" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" />
 	*</BuildProj>
 
 	.ITEM('__newproject.f2b').Remove()

@@ -97,28 +97,31 @@
 		</FIELD>
 	</FIELDS>
 
+	<IndexFiles>
 
-	<indexFile>_EXPRMAP.CDX</indexFile>
+		<IndexFile Type="Structural" >
 
-	<INDEXES>
-		<INDEX>
-			<TagName>ORACLE</TagName>
-			<TagType>REGULAR</TagType>
-			<Key>ORACLE</Key>
-			<Filter></Filter>
-			<Order>ASCENDING</Order>
-			<Collate>MACHINE</Collate>
-		</INDEX>
-		<INDEX>
-			<TagName>SQLSERVER</TagName>
-			<TagType>REGULAR</TagType>
-			<Key>SQLSERVER</Key>
-			<Filter></Filter>
-			<Order>ASCENDING</Order>
-			<Collate>MACHINE</Collate>
-		</INDEX>
-	</INDEXES>
+			<INDEXES>
+				<INDEX>
+					<TagName>ORACLE</TagName>
+					<TagType>REGULAR</TagType>
+					<Key>ORACLE</Key>
+					<Filter></Filter>
+					<Order>ASCENDING</Order>
+					<Collate>MACHINE</Collate>
+				</INDEX>
+				<INDEX>
+					<TagName>SQLSERVER</TagName>
+					<TagType>REGULAR</TagType>
+					<Key>SQLSERVER</Key>
+					<Filter></Filter>
+					<Order>ASCENDING</Order>
+					<Collate>MACHINE</Collate>
+				</INDEX>
+			</INDEXES>
+		</IndexFile>
 
+	</IndexFiles>
 
 
 	<RECORDS>

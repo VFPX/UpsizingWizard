@@ -37,20 +37,23 @@
 		</FIELD>
 	</FIELDS>
 
+	<IndexFiles>
 
-	<indexFile>_KEYWORDS.CDX</indexFile>
+		<IndexFile Type="Structural" >
 
-	<INDEXES>
-		<INDEX>
-			<TagName>KEYWORD</TagName>
-			<TagType>REGULAR</TagType>
-			<Key>KEYWORD</Key>
-			<Filter></Filter>
-			<Order>ASCENDING</Order>
-			<Collate>MACHINE</Collate>
-		</INDEX>
-	</INDEXES>
+			<INDEXES>
+				<INDEX>
+					<TagName>KEYWORD</TagName>
+					<TagType>REGULAR</TagType>
+					<Key>KEYWORD</Key>
+					<Filter></Filter>
+					<Order>ASCENDING</Order>
+					<Collate>MACHINE</Collate>
+				</INDEX>
+			</INDEXES>
+		</IndexFile>
 
+	</IndexFiles>
 
 
 	<RECORDS>

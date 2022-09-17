@@ -40,9 +40,25 @@ See [How to contribute to Upsizing Wizard](.github/CONTRIBUTING.md) for details 
 
 ## Releases
 
+### 2022.09.17
+
+* Added a record to the TypeMap table to support upsizing VFP Date to SQL Server.
+
+* Added the reserved word "TRAN" to the keywords table and removed the ServerType column.
+
+* Upon completion, calls the CompleteProcess function rather than displaying a message box and raises the new UpsizingComplete event.
+
+* Fixed a bug in DefaultsAndRules: added [] delimiters around field name.
+
+* Added support for multiple unique keys by appending field name to the name. 
+
+* Error messages in BulkXMLLoad are now logged.
+
+* XSD and XML files used by BulkXMLLoad are now deleted when BulkXMLLoad fails.
+
 ### 2019.02.04
 
-* This updates add the reserved word "BULK" to the keywords table and removes some debugging code.
+* This update adds the reserved word "BULK" to the keywords table and removes some debugging code.
 
 ### 2019.02.04
 

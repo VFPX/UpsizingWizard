@@ -157,36 +157,39 @@
 		</FIELD>
 	</FIELDS>
 
+	<IndexFiles>
 
-	<indexFile>_TYPEMAP.CDX</indexFile>
+		<IndexFile Type="Structural" >
 
-	<INDEXES>
-		<INDEX>
-			<TagName>BOTH</TagName>
-			<TagType>REGULAR</TagType>
-			<Key>LOCALTYPE+SERVER</Key>
-			<Filter></Filter>
-			<Order>ASCENDING</Order>
-			<Collate>MACHINE</Collate>
-		</INDEX>
-		<INDEX>
-			<TagName>LOCALTYPE</TagName>
-			<TagType>REGULAR</TagType>
-			<Key>LOCALTYPE</Key>
-			<Filter></Filter>
-			<Order>ASCENDING</Order>
-			<Collate>MACHINE</Collate>
-		</INDEX>
-		<INDEX>
-			<TagName>REMOTETYPE</TagName>
-			<TagType>REGULAR</TagType>
-			<Key>REMOTETYPE</Key>
-			<Filter></Filter>
-			<Order>ASCENDING</Order>
-			<Collate>MACHINE</Collate>
-		</INDEX>
-	</INDEXES>
+			<INDEXES>
+				<INDEX>
+					<TagName>BOTH</TagName>
+					<TagType>REGULAR</TagType>
+					<Key>LOCALTYPE+SERVER</Key>
+					<Filter></Filter>
+					<Order>ASCENDING</Order>
+					<Collate>MACHINE</Collate>
+				</INDEX>
+				<INDEX>
+					<TagName>LOCALTYPE</TagName>
+					<TagType>REGULAR</TagType>
+					<Key>LOCALTYPE</Key>
+					<Filter></Filter>
+					<Order>ASCENDING</Order>
+					<Collate>MACHINE</Collate>
+				</INDEX>
+				<INDEX>
+					<TagName>REMOTETYPE</TagName>
+					<TagType>REGULAR</TagType>
+					<Key>REMOTETYPE</Key>
+					<Filter></Filter>
+					<Order>ASCENDING</Order>
+					<Collate>MACHINE</Collate>
+				</INDEX>
+			</INDEXES>
+		</IndexFile>
 
+	</IndexFiles>
 
 
 	<RECORDS>
