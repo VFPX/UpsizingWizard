@@ -2248,6 +2248,7 @@ DEFINE CLASS choosetargetdb AS basewizardcontainer OF "basewizard.vcx" 		&& Comb
 	*< OBJECTDATA: ObjPath="lblDescription" UniqueID="" Timestamp="" />
 	*< OBJECTDATA: ObjPath="lblDBExists" UniqueID="" Timestamp="" />
 	*< OBJECTDATA: ObjPath="txtNewDatabaseName" UniqueID="" Timestamp="" />
+	*< OBJECTDATA: ObjPath="chkDropExistingDatabase" UniqueID="" Timestamp="" />
 
 	#INCLUDE "..\include\alldefs.h"
 	*<DefinedPropArrayMethod>
@@ -2262,11 +2263,11 @@ DEFINE CLASS choosetargetdb AS basewizardcontainer OF "basewizard.vcx" 		&& Comb
 		*a: aserverdatabases[1,1]
 	*</DefinedPropArrayMethod>
 
-	Height = 87
+	Height = 100
 	Name = "choosetargetdb"
 	oldlen = 0
 	TabIndex = 1
-	Width = 280
+	Width = 430
 	_memberdata = <VFPData>
 		<memberdata name="aserverdatabases" type="property" display="aServerDatabases"/>
 		<memberdata name="checkdbpermissions" type="method" display="CheckDbPermissions"/>
@@ -2291,7 +2292,19 @@ DEFINE CLASS choosetargetdb AS basewizardcontainer OF "basewizard.vcx" 		&& Comb
 		Width = 133
 		*< END OBJECT: ClassLib="basewizard.vcx" BaseClass="combobox" />
 
+	ADD OBJECT 'chkDropExistingDatabase' AS basecheckbox WITH ;
+		Alignment = 0, ;
+		Caption = "Drop existing database and recreate", ;
+		ControlSource = "Thisform.lDropExistingDatabase", ;
+		Left = 0, ;
+		Name = "chkDropExistingDatabase", ;
+		TabIndex = 6, ;
+		Top = 80, ;
+		ZOrderSet = 7
+		*< END OBJECT: ClassLib="basecontrols.vcx" BaseClass="checkbox" />
+
 	ADD OBJECT 'lblDBExists' AS basewizardlabel WITH ;
+		AutoSize = .F., ;
 		Caption = "<db name already exists message goes here>", ;
 		FontBold = .T., ;
 		ForeColor = 255,0,0, ;
@@ -2300,7 +2313,7 @@ DEFINE CLASS choosetargetdb AS basewizardcontainer OF "basewizard.vcx" 		&& Comb
 		TabIndex = 5, ;
 		Top = 59, ;
 		Visible = .F., ;
-		Width = 263, ;
+		Width = 400, ;
 		WordWrap = .T.
 		*< END OBJECT: ClassLib="basewizard.vcx" BaseClass="label" />
 
@@ -2492,7 +2505,9 @@ DEFINE CLASS choosetargetdb AS basewizardcontainer OF "basewizard.vcx" 		&& Comb
 			*Make sure name isn't already taken
 			otherwise
 		*-- 2018-10-20 - JRL: added IF and ENDIF: if there are no database on the server, don't look for a duplicate
-				if not empty(This.aServerDatabases)
+		*** DH 2022-12-24: don't look for a duplicate if we're dropping an existing database
+		*		if not empty(This.aServerDatabases)
+				if not empty(This.aServerDatabases) and not Thisform.lDropExistingDatabase
 					lcExact = set('EXACT')
 					set exact on
 					for i = 1 to alen(This.aServerDatabases, 1)
@@ -2627,6 +2642,14 @@ DEFINE CLASS choosetargetdb AS basewizardcontainer OF "basewizard.vcx" 		&& Comb
 		
 	ENDPROC
 
+	PROCEDURE chkDropExistingDatabase.Click
+		if not Thisform.lTargetDatabaseValid
+			This.Parent.IsValid()
+			Thisform.RefreshSteps()
+		endif not Thisform.lTargetDatabaseValid
+		
+	ENDPROC
+
 	PROCEDURE lblDescription.Init
 		This.Caption = NEW_LBL_DESC_LOC
 		
@@ -2659,6 +2682,8 @@ DEFINE CLASS choosetargetdb AS basewizardcontainer OF "basewizard.vcx" 		&& Comb
 				iif(empty(Thisform.oEngine.DataSourceName), alltrim(Thisform.cServer), ;
 				RTRIM(Thisform.oEngine.DataSourceName))), DATABASE_TXT_LOC + ":")
 			Thisform.oEngine.CreateNewDB=.F.
+			This.Parent.chkDropExistingDatabase.Visible = .F.
+			Thisform.lDropExistingDatabase = .F.
 		ELSE
 			this.parent.cboDatabases.enabled=.F.
 			this.parent.cboDatabases.visible=.F.
@@ -2672,6 +2697,7 @@ DEFINE CLASS choosetargetdb AS basewizardcontainer OF "basewizard.vcx" 		&& Comb
 			ENDIF
 			this.parent.lblDescription.caption=NEW_LBL_DESC_LOC
 			Thisform.oEngine.CreateNewDB=.T.
+			This.Parent.chkDropExistingDatabase.Visible = .T.
 		endif
 		This.Parent.IsValid()
 		dodefault()
@@ -3313,7 +3339,6 @@ DEFINE CLASS exportoptions AS basecontainer OF "basecontrols.vcx"
  	*< CLASSDATA: Baseclass="container" Timestamp="" Scale="Pixels" Uniqueid="" />
 
 	*-- OBJECTDATA items order determines ZOrder / El orden de los items OBJECTDATA determina el ZOrder 
-	*< OBJECTDATA: ObjPath="Baseshape2" UniqueID="" Timestamp="" />
 	*< OBJECTDATA: ObjPath="Baseshape1" UniqueID="" Timestamp="" />
 	*< OBJECTDATA: ObjPath="Wizshape1" UniqueID="" Timestamp="" />
 	*< OBJECTDATA: ObjPath="Wizshape2" UniqueID="" Timestamp="" />
@@ -3321,8 +3346,9 @@ DEFINE CLASS exportoptions AS basecontainer OF "basecontrols.vcx"
 	*< OBJECTDATA: ObjPath="chkDefaults" UniqueID="" Timestamp="" />
 	*< OBJECTDATA: ObjPath="chkIndexes" UniqueID="" Timestamp="" />
 	*< OBJECTDATA: ObjPath="chkRemotizeViews" UniqueID="" Timestamp="" />
-	*< OBJECTDATA: ObjPath="chkReport" UniqueID="" Timestamp="" />
+	*< OBJECTDATA: ObjPath="chkComments" UniqueID="" Timestamp="" />
 	*< OBJECTDATA: ObjPath="chkRelations" UniqueID="" Timestamp="" />
+	*< OBJECTDATA: ObjPath="Baseshape2" UniqueID="" Timestamp="" />
 	*< OBJECTDATA: ObjPath="chkStructureOnly" UniqueID="" Timestamp="" />
 	*< OBJECTDATA: ObjPath="chkTableToView" UniqueID="" Timestamp="" />
 	*< OBJECTDATA: ObjPath="chkSavePwd" UniqueID="" Timestamp="" />
@@ -3334,8 +3360,10 @@ DEFINE CLASS exportoptions AS basecontainer OF "basecontrols.vcx"
 	*< OBJECTDATA: ObjPath="chkBlankDates" UniqueID="" Timestamp="" />
 	*< OBJECTDATA: ObjPath="Wizlabel2" UniqueID="" Timestamp="" />
 	*< OBJECTDATA: ObjPath="chkBulkInsert" UniqueID="" Timestamp="" />
-	*< OBJECTDATA: ObjPath="lblReportOptions" UniqueID="" Timestamp="" />
 	*< OBJECTDATA: ObjPath="Baselabel1" UniqueID="" Timestamp="" />
+	*< OBJECTDATA: ObjPath="lblReportOptions" UniqueID="" Timestamp="" />
+	*< OBJECTDATA: ObjPath="chkReport" UniqueID="" Timestamp="" />
+	*< OBJECTDATA: ObjPath="chkCreateDefaults" UniqueID="" Timestamp="" />
 	*< OBJECTDATA: ObjPath="txtReportDir" UniqueID="" Timestamp="" />
 	*< OBJECTDATA: ObjPath="lblReportDir" UniqueID="" Timestamp="" />
 	*< OBJECTDATA: ObjPath="cmdReportDir" UniqueID="" Timestamp="" />
@@ -3347,7 +3375,7 @@ DEFINE CLASS exportoptions AS basecontainer OF "basecontrols.vcx"
 		*m: setoptions
 	*</DefinedPropArrayMethod>
 
-	Height = 271
+	Height = 311
 	Name = "exportoptions"
 	Width = 602
 
@@ -3357,8 +3385,8 @@ DEFINE CLASS exportoptions AS basecontainer OF "basecontrols.vcx"
 		Left = 6, ;
 		Name = "Baselabel1", ;
 		Style = 3, ;
-		TabIndex = 15, ;
-		Top = 153, ;
+		TabIndex = 17, ;
+		Top = 193, ;
 		ZOrderSet = 20
 		*< END OBJECT: ClassLib="basecontrols.vcx" BaseClass="label" />
 
@@ -3367,7 +3395,7 @@ DEFINE CLASS exportoptions AS basecontainer OF "basecontrols.vcx"
 		Left = 0, ;
 		Name = "Baseshape1", ;
 		Style = 3, ;
-		Top = 160, ;
+		Top = 200, ;
 		Width = 263, ;
 		ZOrderSet = 0
 		*< END OBJECT: ClassLib="basecontrols.vcx" BaseClass="shape" />
@@ -3377,7 +3405,7 @@ DEFINE CLASS exportoptions AS basecontainer OF "basecontrols.vcx"
 		Left = 270, ;
 		Name = "Baseshape2", ;
 		Style = 3, ;
-		Top = 160, ;
+		Top = 200, ;
 		Width = 325, ;
 		ZOrderSet = 0
 		*< END OBJECT: ClassLib="basecontrols.vcx" BaseClass="shape" />
@@ -3387,8 +3415,8 @@ DEFINE CLASS exportoptions AS basecontainer OF "basecontrols.vcx"
 		Caption = "Upsi\<ze blank dates as NULL", ;
 		Left = 10, ;
 		Name = "chkBlankDates", ;
-		TabIndex = 18, ;
-		Top = 195, ;
+		TabIndex = 20, ;
+		Top = 235, ;
 		Value = .T., ;
 		ZOrderSet = 17
 		*< END OBJECT: ClassLib="basecontrols.vcx" BaseClass="checkbox" />
@@ -3399,9 +3427,29 @@ DEFINE CLASS exportoptions AS basecontainer OF "basecontrols.vcx"
 		ControlSource = "Thisform.lUseBulkInsert", ;
 		Left = 10, ;
 		Name = "chkBulkInsert", ;
-		TabIndex = 17, ;
-		Top = 175, ;
+		TabIndex = 19, ;
+		Top = 215, ;
 		ZOrderSet = 19
+		*< END OBJECT: ClassLib="basecontrols.vcx" BaseClass="checkbox" />
+
+	ADD OBJECT 'chkComments' AS basecheckbox WITH ;
+		Alignment = 0, ;
+		Caption = "\<Comments", ;
+		Left = 10, ;
+		Name = "chkComments", ;
+		TabIndex = 8, ;
+		Top = 110, ;
+		ZOrderSet = 7
+		*< END OBJECT: ClassLib="basecontrols.vcx" BaseClass="checkbox" />
+
+	ADD OBJECT 'chkCreateDefaults' AS basecheckbox WITH ;
+		Alignment = 0, ;
+		Caption = "Cr\<eate default constraints for all columns", ;
+		Left = 10, ;
+		Name = "chkCreateDefaults", ;
+		TabIndex = 11, ;
+		Top = 160, ;
+		ZOrderSet = 7
 		*< END OBJECT: ClassLib="basecontrols.vcx" BaseClass="checkbox" />
 
 	ADD OBJECT 'chkDefaults' AS basecheckbox WITH ;
@@ -3449,7 +3497,7 @@ DEFINE CLASS exportoptions AS basecontainer OF "basecontrols.vcx"
 		Caption = "Redirec\<t views to remote data", ;
 		Left = 280, ;
 		Name = "chkRemotizeViews", ;
-		TabIndex = 11, ;
+		TabIndex = 13, ;
 		Top = 55, ;
 		ZOrderSet = 6
 		*< END OBJECT: ClassLib="basecontrols.vcx" BaseClass="checkbox" />
@@ -3460,8 +3508,8 @@ DEFINE CLASS exportoptions AS basecontainer OF "basecontrols.vcx"
 		ControlSource = "Thisform.oEngine.DoReport", ;
 		Left = 280, ;
 		Name = "chkReport", ;
-		TabIndex = 19, ;
-		Top = 175, ;
+		TabIndex = 21, ;
+		Top = 215, ;
 		ZOrderSet = 8
 		*< END OBJECT: ClassLib="basecontrols.vcx" BaseClass="checkbox" />
 
@@ -3470,7 +3518,7 @@ DEFINE CLASS exportoptions AS basecontainer OF "basecontrols.vcx"
 		Caption = "Save pass\<word with views", ;
 		Left = 280, ;
 		Name = "chkSavePwd", ;
-		TabIndex = 13, ;
+		TabIndex = 15, ;
 		Top = 95, ;
 		ZOrderSet = 11
 		*< END OBJECT: ClassLib="basecontrols.vcx" BaseClass="checkbox" />
@@ -3490,7 +3538,7 @@ DEFINE CLASS exportoptions AS basecontainer OF "basecontrols.vcx"
 		Caption = "Create re\<mote views on tables", ;
 		Left = 280, ;
 		Name = "chkTableToView", ;
-		TabIndex = 12, ;
+		TabIndex = 14, ;
 		Top = 75, ;
 		ZOrderSet = 10
 		*< END OBJECT: ClassLib="basecontrols.vcx" BaseClass="checkbox" />
@@ -3509,7 +3557,7 @@ DEFINE CLASS exportoptions AS basecontainer OF "basecontrols.vcx"
 		Caption = "\<Advanced...", ;
 		Left = 520, ;
 		Name = "cmdAdvanced", ;
-		TabIndex = 14, ;
+		TabIndex = 16, ;
 		Top = 0, ;
 		ZOrderSet = 15
 		*< END OBJECT: ClassLib="basecontrols.vcx" BaseClass="commandbutton" />
@@ -3519,8 +3567,8 @@ DEFINE CLASS exportoptions AS basecontainer OF "basecontrols.vcx"
 		Height = 22, ;
 		Left = 565, ;
 		Name = "cmdReportDir", ;
-		TabIndex = 22, ;
-		Top = 195, ;
+		TabIndex = 24, ;
+		Top = 235, ;
 		Width = 22
 		*< END OBJECT: ClassLib="basewizard.vcx" BaseClass="commandbutton" />
 
@@ -3530,8 +3578,8 @@ DEFINE CLASS exportoptions AS basecontainer OF "basecontrols.vcx"
 		Name = "Combo1", ;
 		RowSource = "General fields override,General and memo fields override,All fields override,Default settings", ;
 		RowSourceType = 1, ;
-		TabIndex = 9, ;
-		Top = 115, ;
+		TabIndex = 10, ;
+		Top = 135, ;
 		Width = 160, ;
 		ZOrderSet = 13
 		*< END OBJECT: ClassLib="basecontrols.vcx" BaseClass="combobox" />
@@ -3540,8 +3588,8 @@ DEFINE CLASS exportoptions AS basecontainer OF "basecontrols.vcx"
 		Caption = "\<Output folder", ;
 		Left = 280, ;
 		Name = "lblReportDir", ;
-		TabIndex = 20, ;
-		Top = 199
+		TabIndex = 22, ;
+		Top = 239
 		*< END OBJECT: ClassLib="basewizard.vcx" BaseClass="label" />
 
 	ADD OBJECT 'lblReportOptions' AS baselabel WITH ;
@@ -3550,8 +3598,8 @@ DEFINE CLASS exportoptions AS basecontainer OF "basecontrols.vcx"
 		Left = 276, ;
 		Name = "lblReportOptions", ;
 		Style = 3, ;
-		TabIndex = 16, ;
-		Top = 153, ;
+		TabIndex = 18, ;
+		Top = 193, ;
 		ZOrderSet = 20
 		*< END OBJECT: ClassLib="basecontrols.vcx" BaseClass="label" />
 
@@ -3559,8 +3607,8 @@ DEFINE CLASS exportoptions AS basecontainer OF "basecontrols.vcx"
 		Caption = "Server temp folder", ;
 		Left = 0, ;
 		Name = "lblServerTempFolder", ;
-		TabIndex = 23, ;
-		Top = 244
+		TabIndex = 25, ;
+		Top = 284
 		*< END OBJECT: ClassLib="basewizard.vcx" BaseClass="label" />
 
 	ADD OBJECT 'txtReportDir' AS basewizardtextbox WITH ;
@@ -3568,8 +3616,8 @@ DEFINE CLASS exportoptions AS basecontainer OF "basecontrols.vcx"
 		Height = 22, ;
 		Left = 350, ;
 		Name = "txtReportDir", ;
-		TabIndex = 21, ;
-		Top = 195, ;
+		TabIndex = 23, ;
+		Top = 235, ;
 		Width = 215
 		*< END OBJECT: ClassLib="basewizard.vcx" BaseClass="textbox" />
 
@@ -3578,8 +3626,8 @@ DEFINE CLASS exportoptions AS basecontainer OF "basecontrols.vcx"
 		Height = 22, ;
 		Left = 95, ;
 		Name = "txtServerTempFolder", ;
-		TabIndex = 24, ;
-		Top = 240, ;
+		TabIndex = 26, ;
+		Top = 280, ;
 		Width = 295
 		*< END OBJECT: ClassLib="basewizard.vcx" BaseClass="textbox" />
 
@@ -3600,7 +3648,7 @@ DEFINE CLASS exportoptions AS basecontainer OF "basecontrols.vcx"
 		Left = 276, ;
 		Name = "Wizlabel2", ;
 		Style = 3, ;
-		TabIndex = 10, ;
+		TabIndex = 12, ;
 		Top = 28, ;
 		ZOrderSet = 18
 		*< END OBJECT: ClassLib="basecontrols.vcx" BaseClass="label" />
@@ -3609,13 +3657,13 @@ DEFINE CLASS exportoptions AS basecontainer OF "basecontrols.vcx"
 		Caption = "\<Null mapping:", ;
 		Left = 10, ;
 		Name = "Wizlabel3", ;
-		TabIndex = 8, ;
-		Top = 119, ;
+		TabIndex = 9, ;
+		Top = 139, ;
 		ZOrderSet = 14
 		*< END OBJECT: ClassLib="basecontrols.vcx" BaseClass="label" />
 
 	ADD OBJECT 'Wizshape1' AS baseshape WITH ;
-		Height = 109, ;
+		Height = 149, ;
 		Left = 0, ;
 		Name = "Wizshape1", ;
 		Style = 3, ;
@@ -3625,7 +3673,7 @@ DEFINE CLASS exportoptions AS basecontainer OF "basecontrols.vcx"
 		*< END OBJECT: ClassLib="basecontrols.vcx" BaseClass="shape" />
 
 	ADD OBJECT 'Wizshape2' AS baseshape WITH ;
-		Height = 109, ;
+		Height = 149, ;
 		Left = 270, ;
 		Name = "Wizshape2", ;
 		Style = 3, ;
@@ -3654,6 +3702,7 @@ DEFINE CLASS exportoptions AS basecontainer OF "basecontrols.vcx"
 			.chkIndexes.value = Thisform.oEngine.ExportIndexes
 			.chkDefaults.value = Thisform.oEngine.ExportDefaults
 			.chkValidation.value = Thisform.oEngine.ExportValidation
+			.chkCreateDefaults.Value = Thisform.oEngine.CreateDefaults
 		
 			*If the user is upsizing with a connection def, it will not
 			*have a password added or removed from it.  Any connections created
@@ -3695,6 +3744,16 @@ DEFINE CLASS exportoptions AS basecontainer OF "basecontrols.vcx"
 	PROCEDURE chkBlankDates.Click
 		Thisform.oEngine.BlankDateValue = iif(This.Value, .NULL., ;
 			SQL_SERVER_EMPTY_DATE_Y2K)
+		
+	ENDPROC
+
+	PROCEDURE chkComments.Click
+		Thisform.oEngine.ExportComments = This.Value
+		
+	ENDPROC
+
+	PROCEDURE chkCreateDefaults.Click
+		Thisform.oEngine.CreateDefaults = This.Value
 		
 	ENDPROC
 
@@ -3978,6 +4037,7 @@ DEFINE CLASS upsizingwizardform AS basewizardform OF "basewizard.vcx"
 		*p: cserverusername		&& The user name to use for the server
 		*p: csourcedatabase		&& The source database to upsize
 		*p: ctargetdatabase		&& The database to upsize to
+		*p: ldropexistingdatabase		&& .T. to drop an existing database
 		*p: lneedreloadfields		&& .T. if we need to reload fields because the user changed source databases
 		*p: ltablechosen		&& .T. if a table was chosen
 		*p: ltargetdatabasevalid		&& .T. if the target database is valid
@@ -4007,6 +4067,7 @@ DEFINE CLASS upsizingwizardform AS basewizardform OF "basewizard.vcx"
 	DoCreate = .T.
 	Height = 504
 	HelpContextID = 1999945411
+	ldropexistingdatabase = .F.		&& .T. to drop an existing database
 	lneedreloadfields = .F.		&& .T. if we need to reload fields because the user changed source databases
 	lsavesettings = .F.
 	ltablechosen = .F.		&& .T. if a table was chosen
@@ -4076,6 +4137,7 @@ DEFINE CLASS upsizingwizardform AS basewizardform OF "basewizard.vcx"
 		<memberdata name="completeprocess" type="method" display="CompleteProcess"/>
 		<memberdata name="setsourcedatabase" type="method" display="SetSourceDatabase"/>
 		<memberdata name="upsizecomplete" display="UpsizeComplete"/>
+		<memberdata name="ldropexistingdatabase" display="lDropExistingDatabase"/>
 		</VFPData>
 	pgfWizard.BASEPAGE1.Name = "BASEPAGE1"
 	pgfWizard.Basepage2.Caption = "Basepage2"
@@ -4221,7 +4283,9 @@ DEFINE CLASS upsizingwizardform AS basewizardform OF "basewizard.vcx"
 		lblDBExists.Name = "lblDBExists", ;
 		lblDBExists.ZOrderSet = 3, ;
 		txtNewDatabaseName.Name = "txtNewDatabaseName", ;
-		txtNewDatabaseName.ZOrderSet = 4
+		txtNewDatabaseName.ZOrderSet = 4, ;
+		chkDropExistingDatabase.Alignment = 0, ;
+		chkDropExistingDatabase.Name = "chkDropExistingDatabase"
 		*< END OBJECT: ClassLib="upswiz.vcx" BaseClass="container" />
 
 	ADD OBJECT 'pgfWizard.Basepage3.Image1' AS baseimage WITH ;
@@ -4356,6 +4420,7 @@ DEFINE CLASS upsizingwizardform AS basewizardform OF "basewizard.vcx"
 		TabIndex = 4, ;
 		Top = 80, ;
 		ZOrderSet = 1, ;
+		Baseshape2.Name = "Baseshape2", ;
 		Baseshape1.Name = "Baseshape1", ;
 		Wizshape1.Name = "Wizshape1", ;
 		Wizshape2.Name = "Wizshape2", ;
@@ -4365,11 +4430,14 @@ DEFINE CLASS upsizingwizardform AS basewizardform OF "basewizard.vcx"
 		chkDefaults.Name = "chkDefaults", ;
 		chkIndexes.Alignment = 0, ;
 		chkIndexes.Name = "chkIndexes", ;
+		chkCreateDefaults.Alignment = 0, ;
+		chkCreateDefaults.Name = "chkCreateDefaults", ;
 		chkRemotizeViews.Alignment = 0, ;
 		chkRemotizeViews.Name = "chkRemotizeViews", ;
+		chkReport.Alignment = 0, ;
+		chkReport.Name = "chkReport", ;
 		chkRelations.Alignment = 0, ;
 		chkRelations.Name = "chkRelations", ;
-		Baseshape2.Name = "Baseshape2", ;
 		chkStructureOnly.Alignment = 0, ;
 		chkStructureOnly.Name = "chkStructureOnly", ;
 		chkTableToView.Alignment = 0, ;
@@ -4387,10 +4455,8 @@ DEFINE CLASS upsizingwizardform AS basewizardform OF "basewizard.vcx"
 		Wizlabel2.Name = "Wizlabel2", ;
 		chkBulkInsert.Alignment = 0, ;
 		chkBulkInsert.Name = "chkBulkInsert", ;
-		Baselabel1.Name = "Baselabel1", ;
 		lblReportOptions.Name = "lblReportOptions", ;
-		chkReport.Alignment = 0, ;
-		chkReport.Name = "chkReport", ;
+		Baselabel1.Name = "Baselabel1", ;
 		txtReportDir.Name = "txtReportDir", ;
 		lblReportDir.Name = "lblReportDir", ;
 		cmdReportDir.Name = "cmdReportDir", ;
@@ -4726,6 +4792,7 @@ DEFINE CLASS upsizingwizardform AS basewizardform OF "basewizard.vcx"
 							else
 								This.oEngine.ServerDBName = This.cTargetDatabase
 							endif This.oEngine.CreateNewDB
+							This.oEngine.DropExistingDatabase = This.lDropExistingDatabase
 							.BasePage5.ExportOptions.SetOptions()
 							if This.lNeedReloadFields
 								lnOldWorkArea = select()

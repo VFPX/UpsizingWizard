@@ -40,6 +40,30 @@ See [How to contribute to Upsizing Wizard](.github/CONTRIBUTING.md) for details 
 
 ## Releases
 
+### 2022.12.27
+
+* If you turn on the new *Create default constraints for all columns* option (the CreateDefaults property in the engine object), the Upsizing Wizard will create an appropriate default value (for example, "" for character fields, 0 for numeric fields, etc.) for each column. This is useful for columns that do not allow nulls; omitted them in an INSERT statement will not cause an error since they now get a default value rather than null.
+
+* Related to the previous point, you can now set the DefaultDateValue property of the engine object to the desired deault value for date and datetime columns. The default is null.
+
+* Turn on the new *Comments* export option (the ExportComments property in the engine object) to upsize table and field comments to the MS_Description extended property.
+
+* Turn on the new *Drop existing database and recreate* setting (the DropExistingDatabase property in the engine object) to drop an existing database before upsizing to it.
+
+* If you upsize to an existing database without dropping it, the Upsizing Wizard now drops all foreign key constraints before attempting to drop tables; prior to this change, dropping tables may have failed.
+
+* Changed the default mapping for Memo from Text to Varchar(max). You can still choose Text if you wish, but that data type has been deprecated.
+
+* Added Datetime2 as a non-default mapping.
+
+* Bug fix: upsizing relationships without turning on the *Use declarative RI* setting failed to upsize relationships because a couple of system stored procedures used by the Upsizing Wizard no longer exist. This was fixed.
+
+* Bug fix: relationships are now properly upsized for tables that require square bracket delimiters because their names are reserved words (such as [Order]).
+
+* Bug fix: made AnalyzeIndexes open the table if necessary, since SendData in an extension object may have closed it.
+
+* Bug fix: if the NewDir property of the engine object is set to something other than blank, that setting is now respected.
+
 ### 2022.09.17
 
 * Added a record to the TypeMap table to support upsizing VFP Date to SQL Server.

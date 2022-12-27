@@ -87,6 +87,7 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
     ServerDBSize=0
     ServerLogSize=0
 	ServerTempFolder = ''
+		&& used as the location for temporary files created by bulk XML load
 
     *Oracle Wizard properties
 
@@ -124,7 +125,7 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
     ExportDRI=.F.
     ExportStructureOnly=.F.
     ExportDefaults=.T.
-    ExportTimeStamp=.T.
+    ExportTimeStamp=.T.				&& Note: this isn't used anywhere
     ExportTableToView=.F.
     ExportViewToRmt=.T.
     ExportSavePwd=.F.
@@ -134,6 +135,9 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
     ViewNameExtension=VIEW_NAME_EXTENSION_LOC
     ViewPrefixOrSuffix=1
     DropLocalTables=.F.
+    CreateDefaults = .F.			&& .T. to create defaults for all columns
+    DropExistingDatabase = .F.		&& .T. to drop an existing database
+    ExportComments = .F.			&& .T. to export comments to the MS_Description extended property
 
     *Names of tables created and aliases
     EnumFieldsTbl=""
@@ -227,9 +231,11 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
 
 	oExtension = .NULL.
 
-* Value to use for blank Date and DateTime values.
+* Values to use for blank Date and DateTime values and as default ("DATE()" is automatically
+* converted to "GETDATE()").
 
-	BlankDateValue = .NULL.
+	BlankDateValue   = .NULL.
+	DefaultDateValue = 'DATE()'
 
 * Default folder to use for report information.
 
@@ -808,6 +814,22 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
     PROCEDURE CreateTargetDB
         LOCAL lcSQL, lcMsg, lnErr, lcErrMsg, lnCompLevel
 
+*** DH 2022-12-24: if we're supposed to drop and recreate an existing database, see if it exists and drop it if so
+		sqlsetprop(This.MasterConnHand, 'QueryTimeOut', 600)
+		if This.DropExistingDatabase and This.CreateNewDB and ;
+			This.ExecuteTempSPT('select count(*) as Cnt from sys.databases where ' + ;
+				'[Name] = ?This.ServerDBName', @lnErr, @lcErrMsg) and ;
+			used('SQLResult') and SQLResult.Cnt = 1
+			text to lcSQL noshow textmerge
+			use master
+			alter database [<<This.ServerDBName>>] set single_user with rollback immediate
+			drop database [<<This.ServerDBName>>]
+			endtext
+        	This.ExecuteTempSPT(lcSQL, @lnErr, @lcErrMsg)
+		endif This.ExecuteTempSPT ...
+		use in select('SQLResult')
+*** DH 2022-12-24: end of new code
+
         *Build the SQL statement
         IF THIS.CreateNewDB THEN
             IF THIS.ServerVer>=7
@@ -820,6 +842,27 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
                 ENDIF
             ENDIF
         ELSE
+*** DH 2022-12-24: drop FK constraints because we can't drop tables without doing so
+			if not This.DropExistingDatabase
+				select (This.EnumTablesTbl)
+				scan
+					text to lcSQL noshow textmerge
+					use <<This.ServerDBName>>
+					exec sp_fkeys '<<alltrim(RmtTblName)>>'
+					endtext
+					This.ExecuteTempSPT(lcSQL, @lnErr, @lcErrMsg)
+					if used('SQLResult')
+						scan
+							text to lcSQL noshow textmerge
+							alter table [<<alltrim(FKTable_Name)>>] drop constraint [<<alltrim(FK_Name)>>]
+							endtext
+							This.ExecuteTempSPT(lcSQL, @lnErr, @lcErrMsg)
+						endscan
+					endif used('SQLResult')
+				endscan
+				use in select('SQLResult')
+			endif not This.DropExistingDatabase
+*** DH 2022-12-24: end of new code
             RETURN
         ENDIF
 
@@ -839,6 +882,7 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
             THIS.UpDateTherm(0,TAKES_AWHILE_LOC)
             SQLSETPROP(THIS.MasterConnHand,"QueryTimeOut",600)
             THIS.MyError=0
+
             IF !THIS.ExecuteTempSPT(lcSQL, @lnErr,@lcErrMsg) THEN
                 IF lnErr=262 THEN
                     *User doesn't have CREATE DATABASE permissions
@@ -3407,6 +3451,12 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
 
             *Read information for each tag
 
+* DH 2022-10-31: open the table if necessary (SendData in an extension object may have closed it)
+			if not used(lcCursorName)
+				use (lcTablePath) alias (lcCursorName) shared again in 0
+			endif not used(lcCursorName)
+* DH 2022-10-31: end of new code
+
             SELECT (lcCursorName)
             FOR I=1 TO TAGCOUNT(STRTRAN(lcTablePath,".DBF",".CDX"))
                 lcRemoteExpression=""
@@ -5203,16 +5253,69 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
             * Unlike the above code, the difference between Oracle and SQL Server is handled
             * in the procedure ConvertToDefault rather than here
 
+*** DH 2022-12-25: handle ExportComments property
+			lcComment = dbgetprop(lcTableName, 'Table', 'Comment')
+			if This.ExportComments and not empty(lcComment) and ;
+                This.DoUpsize and llTableExported and This.SQLServer
+				text to lcCommentSQL noshow textmerge
+				exec sp_addextendedproperty 'MS_Description', '<<lcComment>>', 'schema', 'dbo', 'table', '<<chrtran(lcRmtTableName, '[]', '')>>'
+				endtext
+				This.ExecuteTempSPT(lcCommentSQL, @lnError, @lcDefaError)
+			endif This.ExportComments ...
+*** DH 2022-12-25: end of new code
+
             SCAN FOR RTRIM(TblName) == lcTableName
                 lcFldName = RTRIM(&lcEnumFields..FldName)
                 llBitType = IIF(RTRIM(&lcEnumFields..RmtType) = "bit", .T., .F.)
-                lcDefaultExpression = DBGETPROP(lcTableName + "." + lcFldName, "Field", "DefaultValue")
+*** DH 2022-12-25: assign lcRmtFldName rather than below since it's needed
+				lcRmtFldName = rtrim(&lcEnumFields..RmtFldName)
+				if left(lcRmtFldName, 1) <> '['
+					lcRmtFldName = '[' + lcRmtFldName + ']'
+				endif left(lcRmtFldName, 1) <> '['
+*** DH 2022-12-25: end of new code
 
-                IF (THIS.ExportDefaults AND !EMPTY(lcDefaultExpression)) OR llBitType THEN
+*** DH 2022-12-25: handle ExportComments property
+				lcComment = dbgetprop(lcTableName + '.' + lcFldName, 'Field', 'Comment')
+				if This.ExportComments and not empty(lcComment) and ;
+                    This.DoUpsize and llTableExported and This.SQLServer
+					text to lcCommentSQL noshow textmerge
+					exec sp_addextendedproperty 'MS_Description', '<<lcComment>>', 'schema', 'dbo', 'table', '<<chrtran(lcRmtTableName, '[]', '')>>', 'column', '<<chrtran(lcRmtFldName, '[]', '')>>'
+					endtext
+					This.ExecuteTempSPT(lcCommentSQL, @lnError, @lcDefaError)
+				endif This.ExportComments ...
+*** DH 2022-12-25: end of new code
+
+*** DH 2022-12-24: handle CreateDefaults property
+*                lcDefaultExpression = DBGETPROP(lcTableName + "." + lcFldName, "Field", "DefaultValue")
+*                IF (THIS.ExportDefaults AND !EMPTY(lcDefaultExpression)) OR llBitType THEN
+                lcDefaultExpression = iif(This.ExportDefaults, ;
+                	dbgetprop(lcTableName + "." + lcFldName, "Field", "DefaultValue"), '')
+				if empty(lcDefaultExpression) and This.CreateDefaults
+					lcFieldType = rtrim(&lcEnumFields..DataType)
+					do case
+						case lcFieldType $ 'CVM'
+							lcDefaultExpression = "''"
+						case lcFieldType $ 'NFIBY'
+							lcDefaultExpression = '0'
+						case lcFieldType = 'L'
+							lcDefaultExpression = '.F.'
+						case lcFieldType $ 'DT'
+							lcDefaultExpression = This.DefaultDateValue
+						otherwise
+							&& W, G, or Q
+							lcDefaultExpression = '0x00'
+					endcase
+				endif empty(lcDefaultExpression) ...
+
+                IF (THIS.ExportDefaults AND !EMPTY(lcDefaultExpression)) OR llBitType or This.CreateDefaults
+*** DH 2022-12-24: end of new code
 
                     *Convert Fox default to server default
                     do case
-						case This.ExportDefaults and ;
+*** DH 2022-12-24: handle CreateDefaults property
+*						case This.ExportDefaults and ;
+                    		not empty(lcDefaultExpression)
+						case (This.ExportDefaults or This.CreateDefaults) and ;
                     		not empty(lcDefaultExpression)
 *** DH 2015-09-08: pass remote field name to ConvertToDefault
 *** DH 2020-04-01: use delimiters on remote field name
@@ -5220,10 +5323,11 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
 *							lcRemoteDefault = This.ConvertToDefault(lcDefaultExpression, ;
 								lcFldName, lcTableName, lcRmtTableName, ;
 								@lcRemoteDefaultName)
-							lcRmtFldName = RTRIM(&lcEnumFields..RmtFldName)
-							if left(lcRmtFldName, 1) <> '['
-								lcRmtFldName = '[' + lcRmtFldName + ']'
-							endif left(lcRmtFldName, 1) <> '['
+*** DH 2022-12-25: commented this out since assigned earlier now
+*							lcRmtFldName = RTRIM(&lcEnumFields..RmtFldName)
+*							if left(lcRmtFldName, 1) <> '['
+*								lcRmtFldName = '[' + lcRmtFldName + ']'
+*							endif left(lcRmtFldName, 1) <> '['
 *** DH 2020-05-13: end of new code
 							lcRemoteDefault = This.ConvertToDefault(lcDefaultExpression, ;
 								lcFldName, lcTableName, lcRmtTableName, lcRmtFldName, ;
@@ -5970,8 +6074,12 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
 *** DH 12/15/2014: use only SQL Server rather than variants of it
 ***            IF THIS.ExportDRI AND ;
                     (THIS.ServerType = "Oracle" OR THIS.ServerType = "SQL Server95")
-            IF THIS.ExportDRI AND ;
+*** DH 2022-12-24: always do this because the code that handles relations if ExportDRI is .F.
+***					no longer works (the sp_primarykey and sp_foreignkey stored procedures
+***					no longer exist)
+*            IF THIS.ExportDRI AND ;
                     (THIS.ServerType = "Oracle" OR left(THIS.ServerType, 10) = 'SQL Server')
+            IF THIS.ServerType = "Oracle" OR left(THIS.ServerType, 10) = 'SQL Server'
                 *Implement RI constraints at table level since foreign key may be compound
 
                 *Deal with parent table first (or child constraints will fail)
@@ -6010,7 +6118,9 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
                     ENDIF
 
                     *Add primary key constraint
-                    lcSQL="ALTER TABLE [" + lcParent + "]"
+*** DH 2022-12-24: handle brackets already on lcParent
+*                    lcSQL="ALTER TABLE [" + lcParent + "]"
+                    lcSQL="ALTER TABLE [" + chrtran(lcParent, '[]', '') + "]"
                     lcSQL=lcSQL + " ADD " + lcOParen + "CONSTRAINT "
                     lcSQL=lcSQL + "[" + lcConstraintName + "] PRIMARY KEY"
                     lcSQL=lcSQL + " (" + lcNewPrimary + ")" + lcCParen
@@ -6061,7 +6171,9 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
                     lcConstraintName=FOREIGN_KEY_PREFIX + LEFT(lcConstraintName, MAX_NAME_LENGTH-LEN(FOREIGN_KEY_PREFIX))
                     lcConstraintName=THIS.UniqueOraName(lcConstraintName)
 
-                    lcSQL="ALTER TABLE [" + lcChild + "] WITH NOCHECK" &&  NOCHECK Add JEI RKR 2005.03.29
+*** DH 2022-12-24: handle brackets already on lcChild
+*                    lcSQL="ALTER TABLE [" + lcChild  + "] WITH NOCHECK" &&  NOCHECK Add JEI RKR 2005.03.29
+                    lcSQL="ALTER TABLE [" + chrtran(lcChild, '[]', '') + "] WITH NOCHECK" &&  NOCHECK Add JEI RKR 2005.03.29
                     lcSQL=lcSQL + " ADD " +lcOParen + "CONSTRAINT "
                     lcSQL=lcSQL + "[" + lcConstraintName + "]" +  " FOREIGN KEY "
                     lcSQL=lcSQL + " (" + lcNewForeign + ")"
@@ -6075,10 +6187,14 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
 ***                    IF (lcDeleteType=CASCADE_CHAR_LOC AND THIS.ServerType="Oracle") OR ;
                     	((THIS.ServerType = "SQL Server95" AND This.ServerVer >= 8) AND ;
                     	(lcUpdateType = CASCADE_CHAR_LOC OR  lcDeleteType = CASCADE_CHAR_LOC))THEN
-                    IF (lcDeleteType=CASCADE_CHAR_LOC AND THIS.ServerType="Oracle") OR ;
+*** DH 2022-12-24: only do this if ExportDRI is .T.
+*                    IF (lcDeleteType=CASCADE_CHAR_LOC AND THIS.ServerType="Oracle") OR ;
                     	((left(THIS.ServerType, 10) = 'SQL Server' AND This.ServerVer >= 8) AND ;
                     	(lcUpdateType = CASCADE_CHAR_LOC OR  lcDeleteType = CASCADE_CHAR_LOC))THEN
-
+                    IF (lcDeleteType=CASCADE_CHAR_LOC AND THIS.ServerType="Oracle") OR ;
+                    	((left(THIS.ServerType, 10) = 'SQL Server' AND This.ServerVer >= 8) AND ;
+                    	(lcUpdateType = CASCADE_CHAR_LOC OR  lcDeleteType = CASCADE_CHAR_LOC)) and ;
+                    	This.ExportDRI
                     	IF THIS.ServerType="Oracle"
                     		lcSQL=lcSQL + " ON DELETE CASCADE"
                     	ELSE
@@ -6318,7 +6434,11 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
             ENDIF
 
             *If we're dealing with SQL Server, run sp_primarykey, sp_foreignkey
-            IF THIS.ServerType <> "Oracle" AND ALEN(aNewPrimary,1) <= 8 AND !THIS.ExportDRI THEN
+
+*** DH 2022-12-24:  this code is no longer used because the sp_primarykey and sp_foreignkey
+***					stored procedures no longer exist
+*            IF THIS.ServerType <> "Oracle" AND ALEN(aNewPrimary,1) <= 8 AND !THIS.ExportDRI THEN
+            IF .F.
                 *Check if the table is in multiple rels
                 SELECT COUNT(*) FROM (lcEnumRelsTbl) WHERE RTRIM(DD_PARENT)==lcParent ;
                     AND !DD_CHIEXPR=="" AND !DD_PAREXPR=="" INTO ARRAY aDupeCount
@@ -6330,12 +6450,14 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
                     IF RTRIM(aIndexExpr)==lcNewPrimary THEN
                         THIS.SetPKey(lcParent,lcNewPrimary)
                         THIS.SetFKey(lcChild,lcNewForeign,lcParent)
+						This.SetFKey(lcChild, lcNewForeign, lcParent, lcNewPrimary)
                     ELSE
                         THIS.SetCommonKey(lcParent,@aNewPrimary,lcChild,@aNewForeign)
                     ENDIF
                 ELSE
                     THIS.SetPKey(lcParent,lcNewPrimary)
                     THIS.SetFKey(lcChild,lcNewForeign,lcParent)
+					This.SetFKey(lcChild, lcNewForeign, lcParent, lcNewPrimary)
                 ENDIF
             ENDIF
 
@@ -9194,6 +9316,8 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
         *Create directory for upsizing files if it doesn't exist already
         IF THIS.NewDir=="" THEN
             THIS.NewDir = NEW_DIRNAME_LOC
+*** DH 2022-12-26: always MD and CD to the specified folder
+        endif
             DIMENSION aDirArray[1]
             IF ADIR(aDirArray,THIS.NewDir,'D')=0 THEN
                 MD (THIS.NewDir)
@@ -9202,7 +9326,8 @@ DEFINE CLASS UpsizeEngine AS WizEngineAll of WZEngine.prg
             CD (THIS.NewDir)
             SET DEFAULT TO CURDIR()
             THIS.NewDir=CURDIR()
-        ENDIF
+*** DH 2022-12-26: ENDIF moved above
+*        ENDIF
 
     ENDPROC
 
